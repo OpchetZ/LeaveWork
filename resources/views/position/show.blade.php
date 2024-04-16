@@ -1,4 +1,9 @@
-<x-bootstrap title="">
+<x-app-layout title="ตำแหน่ง">
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            {{ __('ตำแหน่ง') }}
+        </h2>
+    </x-slot>
     <div class="container">
         <div class="row">
             <div class="col-md-12">
@@ -23,7 +28,7 @@
                                     <tr>
                                         <th>ID</th><td>{{ $position->id }}</td>
                                     </tr>
-                                    <tr><th> Job Position </th><td> {{ $position->Job position }} </td></tr>
+                                    <tr><th> Job Position </th><td> {{ $position->Job_position }} </td></tr>
                                 </tbody>
                             </table>
                         </div>
@@ -33,4 +38,4 @@
             </div>
         </div>
     </div>
-</x-bootstrap>
+</x-app-layout>

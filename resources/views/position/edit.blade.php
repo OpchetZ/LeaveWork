@@ -1,9 +1,14 @@
-<x-bootstrap title="">
+<x-app-layout title="แก้ไขตำแหน่ง">
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            {{ __('แก้ไขตำแหน่ง') }}
+        </h2>
+    </x-slot>
     <div class="container">
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
-                    <div class="card-header">Edit position #{{ $position->id }}</div>
+                    {{-- <div class="card-header">Edit position #{{ $position->id }}</div> --}}
                     <div class="card-body">
                         <a href="{{ url('/position') }}" title="Back"><button class="btn btn-warning btn-sm"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</button></a>
                         <br />
@@ -30,4 +35,4 @@
             </div>
         </div>
     </div>
-</x-bootstrap>
+</x-app-layout>
