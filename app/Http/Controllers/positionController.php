@@ -21,7 +21,7 @@ class positionController extends Controller
         $perPage = 25;
 
         if (!empty($keyword)) {
-            $position = position::where('Job position', 'LIKE', "%$keyword%")
+            $position = position::where('Job_position', 'LIKE', "%$keyword%")
                 ->latest()->paginate($perPage);
         } else {
             $position = position::latest()->paginate($perPage);
