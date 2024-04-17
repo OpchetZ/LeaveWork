@@ -1,9 +1,9 @@
 <x-guest-layout title="Login">
     <x-auth-card>
         <x-slot name="logo">
-            <a href="/">
+           
                 <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
-            </a>
+            
         </x-slot>
 
         <!-- Session Status -->
@@ -17,14 +17,15 @@
 
             <!-- Email Address -->
             <div>
-                <x-label for="email" :value="__('Email')" />
+                <x-label for="login" :value="__('อีเมล / ชื่อ')" />
 
-                <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus />
+                <x-input id="login" class="block mt-1 w-full" type="text" name="login" :value="old('login')" required
+                    autofocus />
             </div>
 
             <!-- Password -->
             <div class="mt-4">
-                <x-label for="password" :value="__('Password')" />
+                <x-label for="password" :value="__('รหัสผ่าน')" />
 
                 <x-input id="password" class="block mt-1 w-full"
                                 type="password"
@@ -48,7 +49,7 @@
                 @endif
 
                 <x-button class="ml-3">
-                    {{ __('Log in') }}
+                    {{ __('เข้าสู่ระบบ') }}
                 </x-button>
             </div>
         </form>
