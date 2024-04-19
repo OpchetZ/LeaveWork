@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 use Illuminate\Database\Eloquent\Model;
 
-class status extends Model
+class employ extends Model
 { 
     use HasFactory;
     /**
@@ -14,7 +14,7 @@ class status extends Model
      *
      * @var string
      */
-    protected $table = 'statuses';
+    protected $table = 'employs';
 
     /**
     * The database primary key value.
@@ -28,10 +28,7 @@ class status extends Model
      *
      * @var array
      */
-    protected $fillable = ['status_name', 'sick_max', 'bus_max', 'vaca_max'];
+    protected $fillable = ['name', 'phone', 'Acc_vaca_day', 'status_id', 'post_id'];
 
-    public function employ(){
-        return $this->belongsTo(employ::class,'status_id','id');
-    }
     
 }

@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\employController;
 use App\Http\Controllers\positionController;
 use App\Http\Controllers\statusController;
+use App\Models\position;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -26,10 +28,12 @@ Route::get('/dashboard', function () {
 Route::middleware(['auth'])->group(function (){
     Route::resource('position',positionController::class);
     Route::resource('status',statusController::class);
-
+    Route::resource('employ',employController::class);
 
 });
 
 require __DIR__.'/auth.php';
 
 // Route::resource('position', 'positionController');
+
+// Route::resource('employ', 'employController');

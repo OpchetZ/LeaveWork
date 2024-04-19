@@ -30,5 +30,7 @@ class position extends Model
      */
     protected $fillable = ['Job_position'];
 
-    
+    public function employ(){
+        return $this->belongsTo(employ::class, 'post_id','id');
+    }
 }
