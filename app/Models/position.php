@@ -28,7 +28,7 @@ class position extends Model
      *
      * @var array
      */
-    protected $fillable = ['Job position'];
+    protected $fillable = ['Job_position'];
 
     
 }
