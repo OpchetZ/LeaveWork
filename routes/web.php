@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\positionController;
+use App\Http\Controllers\statusController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -24,6 +25,7 @@ Route::get('/dashboard', function () {
 
 Route::middleware(['auth'])->group(function (){
     Route::resource('position',positionController::class);
+    Route::resource('status',statusController::class);
 
 
 });

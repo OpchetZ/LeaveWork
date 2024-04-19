@@ -18,6 +18,9 @@
                     <x-nav-link :href="route('position.index')" :active="request()->routeIs('position')">
                         {{ __('ตำแหน่ง') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('status.index')" :active="request()->routeIs('status')">
+                        {{ __('สถาณะ') }}
+                    </x-nav-link>
                 </div>
             </div>
 
