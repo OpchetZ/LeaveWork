@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests;
 
 use App\Models\employ;
+use App\Models\position;
+use App\Models\status;
 use Illuminate\Http\Request;
 
 class employController extends Controller
@@ -41,7 +43,10 @@ class employController extends Controller
      */
     public function create()
     {
-        return view('employ.create');
+        $statuses = status::get();
+        $positions = position::get();
+
+        return view('employ.create',compact('statuses','positions'));
     }
 
     /**
@@ -85,8 +90,10 @@ class employController extends Controller
     public function edit($id)
     {
         $employ = employ::findOrFail($id);
+        $statuses = status::get();
+        $positions = position::get();
 
-        return view('employ.edit', compact('employ'));
+        return view('employ.edit', compact('employ','statuses','positions'));
     }
 
     /**
