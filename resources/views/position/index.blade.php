@@ -46,7 +46,7 @@
                                         <td>{{ $item->Job_position }}</td>
                                         {{-- <td>{{ $item->Max_leave }}</td> --}}
                                         <td>
-                                            <a href="{{ url('/position/' . $item->id) }}" title="View position"><button class="btn btn-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i> ดู</button></a>
+                                            {{-- <a href="{{ url('/position/' . $item->id) }}" title="View position"><button class="btn btn-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i> ดู</button></a> --}}
                                             <a href="{{ url('/position/' . $item->id . '/edit') }}" title="Edit position"><button class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> แก้ไข</button></a>
 
                                             <form method="POST" action="{{ url('/position' . '/' . $item->id) }}" accept-charset="UTF-8" style="display:inline">

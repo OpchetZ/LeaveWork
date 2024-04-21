@@ -42,9 +42,12 @@
                                         <th>#</th>
                                         <th>ชื่อ-นามสกุล</th>
                                         <th>เบอร์โทร</th>
-                                        <th>วันหยุดสะสม</th>
                                         <th>ตำแหน่ง</th>
                                         <th>สถาณะ</th>
+                                        <th>วันหยุดสะสม</th>
+                                        <th>ลาพักผ่อน</th>
+                                        <th>ลากิจ</th>
+                                        <th>ลาป่วย</th>
                                         <th>Actions</th>
                                     </tr>
                                 </thead>
@@ -54,9 +57,12 @@
                                             <td>{{ $loop->iteration }}</td>
                                             <td>{{ $item->name }}</td>
                                             <td>{{ $item->phone }}</td>
-                                            <td>{{ $item->Acc_vaca_day }}</td>
                                             <td>{{ $item->position->Job_position }}</td>
                                             <td>{{ $item->status->status_name }}</td>
+                                            <td>{{ $item->Acc_vaca_day }}</td>
+                                            <td>{{ $item->vaca_max }}</td>
+                                            <td>{{ $item->bus_max }}</td>
+                                            <td>{{ $item->sick_max }}</td>
                                             <td>
                                                 <a href="{{ url('/employ/' . $item->id) }}" title="View employ"><button
                                                         class="btn btn-info btn-sm"><i class="fa fa-eye"

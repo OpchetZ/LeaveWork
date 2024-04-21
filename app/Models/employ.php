@@ -29,7 +29,7 @@ class employ extends Model
      *
      * @var array
      */
-    protected $fillable = ['name', 'phone', 'Acc_vaca_day', 'status_id', 'post_id'];
+    protected $fillable = ['name', 'phone', 'Acc_vaca_day', 'status_id', 'post_id', 'vaca_max','bus_max','sick_max'];
 
     public function status()
     {

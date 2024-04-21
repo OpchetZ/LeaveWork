@@ -28,7 +28,7 @@
                                     <tr>
                                         <th>ID</th><td>{{ $status->id }}</td>
                                     </tr>
-                                    <tr><th> Status Name </th><td> {{ $status->status_name }} </td></tr><tr><th> ลาป่วย </th><td> {{ $status->sick_max }} </td></tr><tr><th> ลากิจ </th><td> {{ $status->bus_max }} </td></tr><tr><th> พักผ่อน </th><td> {{ $status->vaca_max }} </td></tr>
+                                    <tr><th> Status Name </th><td> {{ $status->status_name }} </td></tr>
                                 </tbody>
                             </table>
                         </div>

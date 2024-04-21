@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests;
-
+use App\Models\employ;
 use App\Models\position;
 use Illuminate\Http\Request;
 
@@ -67,7 +67,6 @@ class positionController extends Controller
     public function show($id)
     {
         $position = position::findOrFail($id);
-
         return view('position.show', compact('position'));
     }
 

@@ -36,14 +36,14 @@
                             <table class="table">
                                 <thead>
                                     <tr>
-                                        <th>#</th><th>สถาณะ</th><th>ลาป่วย</th><th>ลากิจ</th><th>ลาพักผ่อน</th><th>Actions</th>
+                                        <th>#</th><th>สถาณะ</th><th>Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                 @foreach($status as $item)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $item->status_name }}</td><td>{{ $item->sick_max }}</td><td>{{ $item->bus_max }}</td><td>{{ $item->vaca_max }}</td>
+                                        <td>{{ $item->status_name }}</td>
                                         <td>
                                             <a href="{{ url('/status/' . $item->id) }}" title="View status"><button class="btn btn-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i> View</button></a>
                                             <a href="{{ url('/status/' . $item->id . '/edit') }}" title="Edit status"><button class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button></a>

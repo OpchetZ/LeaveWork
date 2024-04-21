@@ -41,6 +41,22 @@
     </script>
     {!! $errors->first('status_id', '<p class="help-block">:message</p>') !!}
 </div>
+<div class="form-group {{ $errors->has('vaca_max') ? 'has-error' : ''}}">
+    <label for="vaca_max" class="control-label">{{ 'พักผ่อน' }}</label>
+    <input class="form-control" style="border-radius: 12px" name="vaca_max" type="number" step="0.0" id="vaca_max" value="{{ isset($employ->vaca_max) ? $employ->vaca_max : ''}}" >
+    {!! $errors->first('vaca_max', '<p class="help-block">:message</p>') !!}
+</div>
+<div class="form-group {{ $errors->has('bus_max') ? 'has-error' : ''}}">
+    <label for="bus_max" class="control-label">{{ 'ลากิจ' }}</label>
+    <input class="form-control" style="border-radius: 12px" name="bus_max" type="number" id="bus_max" value="{{ isset($employ->bus_max) ? $employ->bus_max : ''}}" >
+    {!! $errors->first('bus_max', '<p class="help-block">:message</p>') !!}
+</div>
+<div class="form-group {{ $errors->has('sick_max') ? 'has-error' : ''}}">
+    <label for="sick_max" class="control-label">{{ 'ลาป่วย' }}</label>
+    <input class="form-control" style="border-radius: 12px" name="sick_max" type="number" id="sick_max" value="{{ isset($employ->sick_max) ? $employ->sick_max : ''}}" >
+    {!! $errors->first('sick_max', '<p class="help-block">:message</p>') !!}
+</div>
+
 
 
 <div class="form-group" style="margin-top: 10px">
