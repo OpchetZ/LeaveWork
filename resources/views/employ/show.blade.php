@@ -41,16 +41,28 @@
                                         <td> {{ $employ->phone }} </td>
                                     </tr>
                                     <tr>
-                                        <th> วันลาสะสม </th>
-                                        <td> {{ $employ->Acc_vaca_day }} </td>
+                                        <th> สถาณะ </th>
+                                        <td> {{ $employ->status->status_name }} </td>
                                     </tr>
                                     <tr>
                                         <th> ตำแหน่ง </th>
                                         <td> {{ $employ->position->Job_position }} </td>
                                     </tr>
                                     <tr>
-                                        <th> สถาณะ </th>
-                                        <td> {{ $employ->status->status_name }} </td>
+                                        <th> วันลาสะสม </th>
+                                        <td> {{ $employ->Acc_vaca_day }} </td>
+                                    </tr>
+                                    <tr>
+                                        <th> ลาพักผ่อน </th>
+                                        <td> {{ $employ->vaca_max }} </td>
+                                    </tr>
+                                    <tr>
+                                        <th> ลากิจ </th>
+                                        <td> {{ $employ->bus_max }} </td>
+                                    </tr>
+                                    <tr>
+                                        <th> ลาป่วย </th>
+                                        <td> {{ $employ->sick_max }} </td>
                                     </tr>
                                 </tbody>
                             </table>
