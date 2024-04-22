@@ -1,14 +1,14 @@
-<x-app-layout title="">
+<x-app-layout title="ใบลา">
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('') }}
+            {{ __('ใบลา') }}
         </h2>
     </x-slot>
     <div class="container">
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
-                    <div class="card-header">Leaverequest</div>
+                    {{-- <div class="card-header">Leaverequest</div> --}}
                     <div class="card-body">
                         <div class="row">
                             <div class="col-lg-9">
@@ -36,14 +36,14 @@
                             <table class="table">
                                 <thead>
                                     <tr>
-                                        <th>#</th><th>Employ Id</th><th>Leave Type Name</th><th>Start Date</th><th>End Date</th><th>Total Leave</th><th>Actions</th>
+                                        <th>#</th><th>ชื่อพนักงาน</th><th>ประเภทการลา</th><th>วันเริ่ม</th><th>วันสิ้นสุด</th><th>วัน</th><th>Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                 @foreach($leaverequest as $item)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $item->employ_id }}</td><td>{{ $item->leave_type_name }}</td><td>{{ $item->start_date }}</td><td>{{ $item->end_date }}</td><td>{{ $item->total_leave }}</td>
+                                        <td>{{ $item->employ->name }}</td><td>{{ $item->leave_type_name }}</td><td>{{ $item->start_date }}</td><td>{{ $item->end_date }}</td><td>{{ $item->total_leave }}</td>
                                         <td>
                                             <a href="{{ url('/leaverequest/' . $item->id) }}" title="View leaverequest"><button class="btn btn-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i> View</button></a>
                                             <a href="{{ url('/leaverequest/' . $item->id . '/edit') }}" title="Edit leaverequest"><button class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button></a>

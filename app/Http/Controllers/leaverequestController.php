@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests;
-
+use App\Models\employ;
 use App\Models\leaverequest;
 use Illuminate\Http\Request;
 
@@ -41,7 +41,8 @@ class leaverequestController extends Controller
      */
     public function create()
     {
-        return view('leaverequest.create');
+        $employs = employ::get();
+        return view('leaverequest.create',compact('employs'));
     }
 
     /**
@@ -85,8 +86,8 @@ class leaverequestController extends Controller
     public function edit($id)
     {
         $leaverequest = leaverequest::findOrFail($id);
-
-        return view('leaverequest.edit', compact('leaverequest'));
+        $employs = employ::get();
+        return view('leaverequest.edit', compact('leaverequest','employs'));
     }
 
     /**
