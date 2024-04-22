@@ -15,6 +15,9 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('leaverequest.index')" :active="request()->routeIs('leaverequest')">
+                        {{ __('ใบลา') }}
+                    </x-nav-link>
                     <x-nav-link :href="route('position.index')" :active="request()->routeIs('position')">
                         {{ __('ตำแหน่ง') }}
                     </x-nav-link>

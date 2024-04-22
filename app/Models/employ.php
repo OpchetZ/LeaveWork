@@ -39,4 +39,9 @@ class employ extends Model
     {
         return $this->belongsTo(Position::class,'post_id');
     }
+    public function LeaveRequests()
+    {
+        return $this->hasMany(leaverequest::class, 'employ_id');
+    }
+
 }
