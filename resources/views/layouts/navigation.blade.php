@@ -12,11 +12,14 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                    {{-- <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
-                    </x-nav-link>
+                    </x-nav-link> --}}
                     <x-nav-link :href="route('leaverequest.index')" :active="request()->routeIs('leaverequest')">
                         {{ __('ใบลา') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('employ.index')" :active="request()->routeIs('employ')">
+                        {{ __('พนักงาน') }}
                     </x-nav-link>
                     <x-nav-link :href="route('position.index')" :active="request()->routeIs('position')">
                         {{ __('ตำแหน่ง') }}
@@ -24,9 +27,7 @@
                     <x-nav-link :href="route('status.index')" :active="request()->routeIs('status')">
                         {{ __('สถาณะ') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('employ.index')" :active="request()->routeIs('employ')">
-                        {{ __('พนักงาน') }}
-                    </x-nav-link>
+                    
                 </div>
             </div>
 

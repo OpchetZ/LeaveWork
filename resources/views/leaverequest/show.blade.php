@@ -10,12 +10,17 @@
                 <div class="card">
                     {{-- <div class="card-header">leaverequest {{ $leaverequest->id }}</div> --}}
                     <div class="card-body">
-
+                        
                         <a href="{{ url('/leaverequest') }}" title="Back"><button class="btn btn-warning btn-sm"><i
                                     class="fa fa-arrow-left" aria-hidden="true"></i> Back</button></a>
                         <a href="{{ url('/leaverequest/' . $leaverequest->id . '/edit') }}"
                             title="Edit leaverequest"><button class="btn btn-primary btn-sm"><i
-                                    class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button></a>
+                                    class="fa fa-pencil-square-o" aria-hidden="true"></i> แก้ไข</button></a>
+                        <a href="{{ url('/leaverequest/' . $leaverequest->id . '/pdf') }}" title="PDF">
+                            <button class="btn btn-success btn-sm">
+                                <i class="fa fa-file" aria-hidden="true"></i> พิมพ์ใบลา
+                            </button>
+                        </a>
 
                         <form method="POST" action="{{ url('leaverequest' . '/' . $leaverequest->id) }}"
                             accept-charset="UTF-8" style="display:inline">
@@ -45,11 +50,11 @@
                                     </tr>
                                     <tr>
                                         <th> วันเริ่ม </th>
-                                        <td> {{ $leaverequest->start_date }} </td>
+                                        <td> {{ $leaverequest->start_date->thaidate('วันที่ j เดือน F พ.ศ. y') }} </td>
                                     </tr>
                                     <tr>
                                         <th> วันสิ้นสุด </th>
-                                        <td> {{ $leaverequest->end_date }} </td>
+                                        <td> {{ $leaverequest->end_date->thaidate('วันที่ j เดือน F พ.ศ. y') }} </td>
                                     </tr>
                                     <tr>
                                         <th> วัน </th>

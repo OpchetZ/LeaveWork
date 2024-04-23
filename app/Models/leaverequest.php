@@ -30,6 +30,8 @@ class leaverequest extends Model
      */
     protected $fillable = ['employ_id', 'leave_type_name', 'start_date', 'end_date', 'total_leave'];
 
+    protected $dates = ['start_date','end_date'];
+
     public function employ()
     {
         return $this->belongsTo(employ::class, 'employ_id');

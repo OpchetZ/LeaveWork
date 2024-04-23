@@ -12,14 +12,17 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col-lg-9">
-                                <a href="{{ url('/leaverequest/create') }}" class="btn btn-success btn-sm" title="Add New leaverequest">
+                                <a href="{{ url('/leaverequest/create') }}" class="btn btn-success btn-sm"
+                                    title="Add New leaverequest">
                                     <i class="fa fa-plus" aria-hidden="true"></i> เพิ่มใบลา
                                 </a>
                             </div>
                             <div class="col-lg-3">
-                                <form method="GET" action="{{ url('/leaverequest') }}" accept-charset="UTF-8" class="form-inline my-2 my-lg-0 float-right" role="search">
+                                <form method="GET" action="{{ url('/leaverequest') }}" accept-charset="UTF-8"
+                                    class="form-inline my-2 my-lg-0 float-right" role="search">
                                     <div class="input-group">
-                                        <input type="text" class="form-control" name="search" placeholder="Search..." value="{{ request('search') }}">
+                                        <input type="text" class="form-control" name="search"
+                                            placeholder="Search..." value="{{ request('search') }}">
                                         <span class="input-group-append">
                                             <button class="btn btn-secondary" type="submit">
                                                 <i class="fa fa-search"></i>
@@ -30,32 +33,53 @@
                             </div>
                         </div>
 
-                        <br/>
-                        <br/>
+                        <br />
+                        <br />
                         <div class="table-responsive">
                             <table class="table">
                                 <thead>
                                     <tr>
-                                        <th>#</th><th>ชื่อพนักงาน</th><th>ประเภทการลา</th><th>วันเริ่ม</th><th>วันสิ้นสุด</th><th>วัน</th><th>Actions</th>
+                                        <th>#</th>
+                                        <th>ชื่อพนักงาน</th>
+                                        <th>ประเภทการลา</th>
+                                        <th>วันเริ่ม</th>
+                                        <th>วันสิ้นสุด</th>
+                                        <th>วัน</th>
+                                        <th>Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                @foreach($leaverequest as $item)
-                                    <tr>
-                                        <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $item->employ->name }}</td><td>{{ $item->leave_type_name }}</td><td>{{ $item->start_date }}</td><td>{{ $item->end_date }}</td><td>{{ $item->total_leave }}</td>
-                                        <td>
-                                            <a href="{{ url('/leaverequest/' . $item->id) }}" title="View leaverequest"><button class="btn btn-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i> View</button></a>
-                                            <a href="{{ url('/leaverequest/' . $item->id . '/edit') }}" title="Edit leaverequest"><button class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button></a>
+                                    @foreach ($leaverequest as $item)
+                                        <tr>
+                                            <td>{{ $loop->iteration }}</td>
+                                            <td>{{ $item->employ->name }}</td>
+                                            <td>{{ $item->leave_type_name }}</td>
+                                            <td>{{ $item->start_date->thaidate('วันที่ j เดือน F พ.ศ. y') }}</td>
+                                            <td>{{ $item->end_date->thaidate('วันที่ j เดือน F พ.ศ. y') }}</td>
+                                            <td>{{ $item->total_leave }}</td>
+                                            <td>
+                                                <a href="{{ url('/leaverequest/' . $item->id) }}"
+                                                    title="View leaverequest"><button class="btn btn-info btn-sm"><i
+                                                            class="fa fa-eye" aria-hidden="true"></i> ดู</button></a>
+                                                <a href="{{ url('/leaverequest/' . $item->id . '/edit') }}"
+                                                    title="Edit leaverequest"><button class="btn btn-primary btn-sm"><i
+                                                            class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                                        แก้ไข</button></a>
 
-                                            <form method="POST" action="{{ url('/leaverequest' . '/' . $item->id) }}" accept-charset="UTF-8" style="display:inline">
-                                                {{ method_field('DELETE') }}
-                                                {{ csrf_field() }}
-                                                <button type="submit" class="btn btn-danger btn-sm" title="Delete leaverequest" onclick="return confirm('Confirm delete?')"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete</button>
-                                            </form>
-                                        </td>
-                                    </tr>
-                                @endforeach
+                                                <form method="POST"
+                                                    action="{{ url('/leaverequest' . '/' . $item->id) }}"
+                                                    accept-charset="UTF-8" style="display:inline">
+                                                    {{ method_field('DELETE') }}
+                                                    {{ csrf_field() }}
+                                                    <button type="submit" class="btn btn-danger btn-sm"
+                                                        title="Delete leaverequest"
+                                                        onclick="return confirm('Confirm delete?')"><i
+                                                            class="fa fa-trash-o" aria-hidden="true"></i>
+                                                        ลบ</button>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                             <div class="pagination-wrapper"> {!! $leaverequest->appends(['search' => Request::get('search')])->render() !!} </div>

@@ -33,6 +33,8 @@ Route::middleware(['auth'])->group(function (){
     Route::resource('employ',employController::class);
     Route::resource('leavetype',leavetypeController::class);
     Route::resource('leaverequest', leaverequestController::class);
+    Route::get('leaverequest/{id}/pdf', [leaverequestController::class, 'pdf']);
+
 });
 
 require __DIR__.'/auth.php';

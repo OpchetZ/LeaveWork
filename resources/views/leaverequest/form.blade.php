@@ -38,7 +38,7 @@
 </div>
 <div class="form-group {{ $errors->has('total_leave') ? 'has-error' : ''}}">
     <label for="total_leave" class="control-label">{{ 'กี่วัน' }}</label>
-    <input class="form-control" style="border-radius: 12px" name="total_leave" type="number" id="total_leave" value="{{ isset($leaverequest->total_leave) ? $leaverequest->total_leave : ''}}" >
+    <input class="form-control" style="border-radius: 12px" name="total_leave" type="number" step="0.1" id="total_leave" value="{{ isset($leaverequest->total_leave) ? $leaverequest->total_leave : ''}}" >
     {!! $errors->first('total_leave', '<p class="help-block">:message</p>') !!}
 </div>
 

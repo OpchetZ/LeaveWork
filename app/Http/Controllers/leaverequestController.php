@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests;
 use App\Models\employ;
 use App\Models\leaverequest;
+use Barryvdh\DomPDF\Facade\Pdf;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class leaverequestController extends Controller
@@ -42,7 +44,7 @@ class leaverequestController extends Controller
     public function create()
     {
         $employs = employ::get();
-        return view('leaverequest.create',compact('employs'));
+        return view('leaverequest.create', compact('employs'));
     }
 
     /**
@@ -54,9 +56,9 @@ class leaverequestController extends Controller
      */
     public function store(Request $request)
     {
-        
+
         $requestData = $request->all();
-        
+
         leaverequest::create($requestData);
 
         return redirect('leaverequest')->with('flash_message', 'leaverequest added!');
@@ -87,7 +89,7 @@ class leaverequestController extends Controller
     {
         $leaverequest = leaverequest::findOrFail($id);
         $employs = employ::get();
-        return view('leaverequest.edit', compact('leaverequest','employs'));
+        return view('leaverequest.edit', compact('leaverequest', 'employs'));
     }
 
     /**
@@ -100,9 +102,9 @@ class leaverequestController extends Controller
      */
     public function update(Request $request, $id)
     {
-        
+
         $requestData = $request->all();
-        
+
         $leaverequest = leaverequest::findOrFail($id);
         $leaverequest->update($requestData);
 
@@ -121,5 +123,13 @@ class leaverequestController extends Controller
         leaverequest::destroy($id);
 
         return redirect('leaverequest')->with('flash_message', 'leaverequest deleted!');
+    }
+    public function pdf($id)
+    {
+        $leaverequest = leaverequest::findOrFail($id);
+        // $startdate = Carbon::parse('2024-04-23')->thaidate('วันที่ j เดือน F พ.ศ. y');
+        $employs = employ::findOrFail($id);
+        $pdf = Pdf::loadView('leaverequest.pdf', compact('leaverequest','employs'));
+        return $pdf->stream("leaverequest-{$id}.pdf");
     }
 }

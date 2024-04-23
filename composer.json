@@ -13,7 +13,9 @@
         "laravel/breeze": "1.9.2",
         "laravel/framework": "^8.75",
         "laravel/sanctum": "^2.11",
-        "laravel/tinker": "^2.5"
+        "laravel/tinker": "^2.5",
+        "nesbot/carbon": "^2.72",
+        "phattarachai/thaidate": "^12.1"
     },
     "require-dev": {
         "appzcoder/crud-generator": "^3.3",
