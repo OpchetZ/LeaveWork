@@ -2,6 +2,7 @@
 
 <head>
     <meta http-equiv="Content-Language" content="th" />
+    <meta charset="UTF-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <!-- Bootstrap 3.x only : DOMPDF support float, not flexbox -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap.min.css"

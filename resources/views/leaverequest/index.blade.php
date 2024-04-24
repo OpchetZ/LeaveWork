@@ -54,8 +54,8 @@
                                             <td>{{ $loop->iteration }}</td>
                                             <td>{{ $item->employ->name }}</td>
                                             <td>{{ $item->leave_type_name }}</td>
-                                            <td>{{ $item->start_date->thaidate('วันที่ j เดือน F พ.ศ. y') }}</td>
-                                            <td>{{ $item->end_date->thaidate('วันที่ j เดือน F พ.ศ. y') }}</td>
+                                            <td>{{ $item->start_date->thaidate('วันที่ j M พ.ศ. y') }}</td>
+                                            <td>{{ $item->end_date->thaidate('วันที่ j M พ.ศ. y') }}</td>
                                             <td>{{ $item->total_leave }}</td>
                                             <td>
                                                 <a href="{{ url('/leaverequest/' . $item->id) }}"
