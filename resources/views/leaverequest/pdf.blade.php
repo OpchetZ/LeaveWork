@@ -1,4 +1,5 @@
 <x-boost-pdf title="">
+    <body style="font-size:<?php echo ($leaverequest->leave_type_name == 'ลาพักผ่อน')? "16px" : "15px"; ?>;">
     <div class="container">
         @if ($leaverequest->leave_type_name =='ลาพักผ่อน')
             
@@ -10,7 +11,7 @@
             <br>
             <div class="col-xs-6 text-right">
                 <div>เขียนที่ โรงพยาบาลอ่างทอง</div>
-                <div>{{ $leaverequest->created_at->thaidate('วันที่ j เดือน F พ.ศ. y') }}</div>
+                <div>{{ $leaverequest->start_date->thaidate('วันที่ j เดือน F พ.ศ. y') }}</div>
             </div>
         </div>
         <div class="row">
@@ -33,12 +34,12 @@
                 <span>
                     ข้าพเจ้า........{{ $leaverequest->employ->name }}...........ตำแหน่ง.......{{ $employs->position->Job_position }}...........................</span>
             </div>
-            <span>สังกัด...........โรงพยาบาลอ่างทอง...........................กลุ่มงาน......................................................................</span>
+            <span>สังกัด...........โรงพยาบาลอ่างทอง...........................กลุ่มงาน....................................................................</span>
             <span>มีวันลาพักผ่อนสะสม..{{ $employs->Acc_vaca_day }}..วันทำการ
                 มีสิทธิลาพักผ่อนประจำปีนี้อีก..{{ $employs->vaca_max }}..วันทำการ
                 รวมเป็น{{ $vacatotal }}วันทำการ</span>
             <span>ขอลาพักผ่อนตั้งแต่{{ $leaverequest->start_date->thaidate('วันที่ j เดือน M พ.ศ. y') }} ถึงวันที่
-                {{ $leaverequest->start_date->thaidate('j เดือน M พ.ศ. y') }}
+                {{ $leaverequest->end_date->thaidate('j เดือน M พ.ศ. y') }}
                 มีกำหนด {{ $leaverequest->total_leave }} วัน</span>
             <span>ในระหว่างการลาติดต่อข้าพเจ้าได้ที่.......................................................................................................</span>
             <br>
@@ -107,7 +108,7 @@
             <br>
             <div class="col-xs-6 text-right">
                 <div>เขียนที่ โรงพยาบาลอ่างทอง</div>
-                <div>{{ $leaverequest->created_at->thaidate('วันที่ j เดือน F พ.ศ. y') }}</div>
+                <div>{{ $leaverequest->start_date->thaidate('วันที่ j เดือน F พ.ศ. y') }}</div>
             </div>
         </div>
         <div class="row">
@@ -130,13 +131,13 @@
                 <span>
                     ข้าพเจ้า........{{ $leaverequest->employ->name }}...........ตำแหน่ง.......{{ $employs->position->Job_position }}...........................</span>
             </div>
-            <span>สังกัด...........โรงพยาบาลอ่างทอง...........................กลุ่มงาน......................................................................</span>
-            <span>มีวันลาพักผ่อนสะสม..{{ $employs->Acc_vaca_day }}..วันทำการ
-                มีสิทธิลาพักผ่อนประจำปีนี้อีก..{{ $employs->vaca_max }}..วันทำการ
-                รวมเป็น{{ $vacatotal }}วันทำการ</span>
-            <span>ขอลาพักผ่อนตั้งแต่{{ $leaverequest->start_date->thaidate('วันที่ j เดือน M พ.ศ. y') }} ถึงวันที่
-                {{ $leaverequest->start_date->thaidate('j เดือน M พ.ศ. y') }}
-                มีกำหนด {{ $leaverequest->total_leave }} วัน</span>
+            <span>สังกัด...........โรงพยาบาลอ่างทอง...........................กลุ่มงาน.............................................................................</span>
+            <div style="text-align: center;">ขอ {{ $leaverequest->leave_type_name }} เนื่องจาก...................................</div>
+            <span>ตั้งแต่{{ $leaverequest->start_date->thaidate('วันที่...j..เดือน..M..พ.ศ...y') }}...ถึงวันที่..
+                .{{ $leaverequest->end_date->thaidate('j...เดือน...M...พ.ศ...y') }}
+                มีกำหนด..{{ $leaverequest->total_leave }}..วัน</span> <br>
+            <span>ข้าพเจ้าได้ {{ $leaverequest->leave_type_name }} ครั้งสุดท้ายตั้งแต่วันที่{{ $leaverequest->start_date->thaidate('..j..M..พ.ศ..Y') }}ถึงวันที่{{ $leaverequest->end_date->thaidate('..j..M..พ.ศ..Y..') }}รวม
+            {{ $leaverequest->total_leave }}..วัน</span> 
             <span>ในระหว่างการลาติดต่อข้าพเจ้าได้ที่.......................................................................................................</span>
             <br>
             <span>..........................................................หมายเลขโทรศัพท์.............{{ $employs->phone }}....................................</span>
@@ -212,4 +213,5 @@
         <span>หมายเหตุ : ห้ามลบขีดเขียน</span>
         @endif
     </div>
+    </body>
     </x-bootstrap-pdf>

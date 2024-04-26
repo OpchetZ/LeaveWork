@@ -38,7 +38,8 @@
         }
         body {
             font-family: 'Sarabun', sans-serif;
-            font-size: 16px;
+            
+            
         }
         /* table {
             font-family: 'THSarabunNew';
@@ -63,8 +64,8 @@
     </style>
 </head>
 
-<body>
+
     {{ $slot }}
-</body>
+
 
 </html>
