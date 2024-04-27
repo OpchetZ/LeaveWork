@@ -28,7 +28,7 @@ class leaverequest extends Model
      *
      * @var array
      */
-    protected $fillable = ['employ_id', 'leave_type_name', 'start_date', 'end_date', 'total_leave'];
+    protected $fillable = ['employ_id', 'leave_type_id', 'start_date', 'end_date', 'total_leave'];
 
     protected $dates = ['start_date','end_date'];
 
@@ -38,7 +38,7 @@ class leaverequest extends Model
     }
     public function leaveType()
     {
-        return $this->belongsTo(leavetype::class, 'leave_type_name','leave_type_name');
+        return $this->belongsTo(leavetype::class, 'leave_type_id');
     }
 
 

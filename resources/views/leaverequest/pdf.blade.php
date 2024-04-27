@@ -1,7 +1,7 @@
 <x-boost-pdf title="">
-    <body style="font-size:<?php echo ($leaverequest->leave_type_name == 'ลาพักผ่อน')? "16px" : "15px"; ?>;">
+    <body style="font-size:<?php echo ($leaverequest->leavetype->leave_type_name == 'ลาพักผ่อน')? "16px" : "15px"; ?>;">
     <div class="container">
-        @if ($leaverequest->leave_type_name =='ลาพักผ่อน')
+        @if ($leaverequest->leavetype->leave_type_name =='ลาพักผ่อน')
             
         
         <div class="row">
@@ -18,7 +18,7 @@
             <div class="col-xs-6">
                 <div>
                     <span> เรื่อง </span>
-                    <span> ขอ{{ $leaverequest->leave_type_name }} </span>
+                    <span> ขอ{{ $leaverequest->leavetype->leave_type_name }} </span>
                 </div>
                 <div>
                     <span> เรียน </span>
@@ -65,9 +65,9 @@
                     <div class="col-xs-4 b">รวมเป็น<br>(วันทำการ)</div>
                 </div>
                 <div class="row">
-                    <div class="col-xs-4 b">20<br></div>
-                    <div class="col-xs-4 b">20 <br> </div>
-                    <div class="col-xs-4 b">20</div>
+                    <div class="col-xs-4 b"><br></div>
+                    <div class="col-xs-4 b"><br> </div>
+                    <div class="col-xs-4 b"><br></div>
                 </div>
 
             </div>
@@ -115,7 +115,7 @@
             <div class="col-xs-6">
                 <div>
                     <span> เรื่อง </span>
-                    <span> ขอ{{ $leaverequest->leave_type_name }} </span>
+                    <span> ขอ{{ $leaverequest->leavetype->leave_type_name }} </span>
                 </div>
                 <div>
                     <span> เรียน </span>
@@ -132,12 +132,12 @@
                     ข้าพเจ้า........{{ $leaverequest->employ->name }}...........ตำแหน่ง.......{{ $employs->position->Job_position }}...........................</span>
             </div>
             <span>สังกัด...........โรงพยาบาลอ่างทอง...........................กลุ่มงาน.............................................................................</span>
-            <div style="text-align: center;">ขอ {{ $leaverequest->leave_type_name }} เนื่องจาก...................................</div>
+            <div style="text-align: center;">ขอ {{ $leaverequest->leavetype->leave_type_name }} เนื่องจาก...................................</div>
             <span>ตั้งแต่{{ $leaverequest->start_date->thaidate('วันที่...j..เดือน..M..พ.ศ...y') }}...ถึงวันที่..
                 .{{ $leaverequest->end_date->thaidate('j...เดือน...M...พ.ศ...y') }}
                 มีกำหนด..{{ $leaverequest->total_leave }}..วัน</span> <br>
-            <span>ข้าพเจ้าได้ {{ $leaverequest->leave_type_name }} ครั้งสุดท้ายตั้งแต่วันที่{{ $leaverequest->start_date->thaidate('..j..M..พ.ศ..Y') }}ถึงวันที่{{ $leaverequest->end_date->thaidate('..j..M..พ.ศ..Y..') }}รวม
-            {{ $leaverequest->total_leave }}..วัน</span> 
+            <span>ข้าพเจ้าได้ {{ $leaverequest->leavetype->leave_type_name }} ครั้งสุดท้ายตั้งแต่วันที่......................ถึงวันที่.....................รวม
+            ...................วัน</span> 
             <span>ในระหว่างการลาติดต่อข้าพเจ้าได้ที่.......................................................................................................</span>
             <br>
             <span>..........................................................หมายเลขโทรศัพท์.............{{ $employs->phone }}....................................</span>
@@ -164,21 +164,21 @@
                 </div>
                 <div class="row">
                     <div class="col-xs-4 b">ป่วย</div>
-                    <div class="col-xs-4 b">20</div>
-                    <div class="col-xs-4 b">20 </div>
-                    <div class="col-xs-4 b">20</div>
+                    <div class="col-xs-4 b"><br></div>
+                    <div class="col-xs-4 b"><br></div>
+                    <div class="col-xs-4 b"><br></div>
                 </div>
                 <div class="row">
                     <div class="col-xs-4 b">กิจส่วนตัว</div>
-                    <div class="col-xs-4 b">20</div>
-                    <div class="col-xs-4 b">20 </div>
-                    <div class="col-xs-4 b">20</div>
+                    <div class="col-xs-4 b"><br></div>
+                    <div class="col-xs-4 b"><br></div>
+                    <div class="col-xs-4 b"><br></div>
                 </div>
                 <div class="row">
                     <div class="col-xs-4 b">คลอดบุตร</div>
-                    <div class="col-xs-4 b">20</div>
-                    <div class="col-xs-4 b">20 </div>
-                    <div class="col-xs-4 b">20</div>
+                    <div class="col-xs-4 b"><br></div>
+                    <div class="col-xs-4 b"><br></div>
+                    <div class="col-xs-4 b"><br></div>
                 </div>
 
             </div>

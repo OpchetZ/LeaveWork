@@ -17,14 +17,14 @@
     </script>
     {!! $errors->first('post_id', '<p class="help-block">:message</p>') !!}
 </div>
-<div class="form-group {{ $errors->has('leave_type_name') ? 'has-error' : ''}}">
-    <label for="leave_type_name" class="control-label">{{ 'ประเภทการลา' }}</label>
-    <select name="leave_type_name" class="form-control" id="leave_type_name" >
-    @foreach (json_decode('{"\u0e25\u0e32\u0e1e\u0e31\u0e01\u0e1c\u0e48\u0e2d\u0e19":"\u0e25\u0e32\u0e1e\u0e31\u0e01\u0e1c\u0e48\u0e2d\u0e19","\u0e25\u0e32\u0e01\u0e34\u0e08":"\u0e25\u0e32\u0e01\u0e34\u0e08","\u0e25\u0e32\u0e1b\u0e48\u0e27\u0e22":"\u0e25\u0e32\u0e1b\u0e48\u0e27\u0e22"}', true) as $optionKey => $optionValue)
-        <option value="{{ $optionKey }}" {{ (isset($leaverequest->leave_type_name) && $leaverequest->leave_type_name == $optionKey) ? 'selected' : ''}}>{{ $optionValue }}</option>
-    @endforeach
+<div class="form-group {{ $errors->has('leave_type_id') ? 'has-error' : ''}}">
+    <label for="leave_type_id" class="control-label">{{ 'ประเภทการลา' }}</label>
+    <select name="leave_type_id" class="form-control" id="leave_type_id" >
+        @foreach($leavetype as $item)
+        <option value="{{ $item->id }}">{{ $item->leave_type_name }}</option>
+        @endforeach
 </select>
-    {!! $errors->first('leave_type_name', '<p class="help-block">:message</p>') !!}
+    {!! $errors->first('leave_type_id', '<p class="help-block">:message</p>') !!}
 </div>
 <div class="form-group {{ $errors->has('start_date') ? 'has-error' : ''}}">
     <label for="start_date" class="control-label">{{ 'วันเริ่ม' }}</label>

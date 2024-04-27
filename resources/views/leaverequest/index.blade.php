@@ -53,7 +53,7 @@
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
                                             <td>{{ $item->employ->name }}</td>
-                                            <td>{{ $item->leave_type_name }}</td>
+                                            <td>{{ $item->leavetype->leave_type_name }}</td>
                                             <td>{{ $item->start_date->thaidate('วันที่ j M พ.ศ. y') }}</td>
                                             <td>{{ $item->end_date->thaidate('วันที่ j M พ.ศ. y') }}</td>
                                             <td>{{ $item->total_leave }}</td>
@@ -65,6 +65,7 @@
                                                     title="Edit leaverequest"><button class="btn btn-primary btn-sm"><i
                                                             class="fa fa-pencil-square-o" aria-hidden="true"></i>
                                                         แก้ไข</button></a>
+                                                        
 
                                                 <form method="POST"
                                                     action="{{ url('/leaverequest' . '/' . $item->id) }}"

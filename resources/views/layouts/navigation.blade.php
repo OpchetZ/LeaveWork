@@ -18,6 +18,9 @@
                     <x-nav-link :href="route('leaverequest.index')" :active="request()->routeIs('leaverequest')">
                         {{ __('ใบลา') }}
                     </x-nav-link>
+                    {{-- <x-nav-link :href="route('history.index')" :active="request()->routeIs('history')">
+                        {{ __('ประวัติการลา') }}
+                    </x-nav-link> --}}
                     <x-nav-link :href="route('employ.index')" :active="request()->routeIs('employ')">
                         {{ __('พนักงาน') }}
                     </x-nav-link>

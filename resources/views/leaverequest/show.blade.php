@@ -21,6 +21,10 @@
                                 <i class="fa fa-file" aria-hidden="true"></i> พิมพ์ใบลา
                             </button>
                         </a>
+                        {{-- <form action="{{route('history.index', $leaverequest->id)}}" method="POST">
+                            {{ csrf_field() }}
+                            <button type="submit" class="btn btn-primary btn-sm" ><i class="fas fa-save">บันทึก </i></button></a>
+                          </form> --}}
 
                         <form method="POST" action="{{ url('leaverequest' . '/' . $leaverequest->id) }}"
                             accept-charset="UTF-8" style="display:inline">
@@ -46,7 +50,7 @@
                                     </tr>
                                     <tr>
                                         <th> ประเภทการลา </th>
-                                        <td> {{ $leaverequest->leave_type_name }} </td>
+                                        <td> {{ $leaverequest->leavetype->leave_type_name }} </td>
                                     </tr>
                                     <tr>
                                         <th> วันเริ่ม </th>

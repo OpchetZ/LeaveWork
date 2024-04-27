@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Http\Requests;
 use App\Models\employ;
+use App\Models\history;
 use App\Models\leaverequest;
+use App\Models\leavetype;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -44,7 +46,8 @@ class leaverequestController extends Controller
     public function create()
     {
         $employs = employ::get();
-        return view('leaverequest.create', compact('employs'));
+        $leavetype = leavetype::get();
+        return view('leaverequest.create', compact('employs','leavetype'));
     }
 
     /**
@@ -89,7 +92,8 @@ class leaverequestController extends Controller
     {
         $leaverequest = leaverequest::findOrFail($id);
         $employs = employ::get();
-        return view('leaverequest.edit', compact('leaverequest', 'employs'));
+        $leavetype = leavetype::get();
+        return view('leaverequest.edit', compact('leaverequest', 'employs','leavetype'));
     }
 
     /**
@@ -132,4 +136,7 @@ class leaverequestController extends Controller
         $pdf = Pdf::loadView('leaverequest.pdf', compact('leaverequest','employs'));
         return $pdf->stream("leaverequest-{$id}.pdf");
     }
+   
+    
+
 }
