@@ -29,7 +29,7 @@ class employ extends Model
      *
      * @var array
      */
-    protected $fillable = ['name', 'phone', 'Acc_vaca_day', 'status_id', 'post_id', 'vaca_max','bus_max','sick_max'];
+    protected $fillable = ['name', 'phone', 'Acc_vaca_day', 'status_id', 'post_id', 'vaca_max','bus_max','sick_max','agent_id'];
 
     public function status()
     {
@@ -42,6 +42,10 @@ class employ extends Model
     public function LeaveRequests()
     {
         return $this->hasMany(leaverequest::class, 'employ_id');
+    }
+    public function agency()
+    {
+        return $this->belongsTo(agency::class,'agent_id');
     }
 
 }

@@ -34,21 +34,25 @@
                                     
                                     <tr>
                                         <th> ชื่อ-นามสกุล </th>
-                                        <td> {{ $employ->name }} </td>
+                                        <td> {{ $employ->name??null }} </td>
                                     </tr>
                                     <tr>
                                         <th> โทรศัพท์ </th>
-                                        <td> {{ $employ->phone }} </td>
+                                        <td> {{ $employ->phone??null }} </td>
                                     </tr>
                                     <tr>
                                         <th> สถาณะ </th>
-                                        <td> {{ $employ->status->status_name }} </td>
+                                        <td> {{ $employ->status->status_name??null }} </td>
                                     </tr>
                                     <tr>
                                         <th> ตำแหน่ง </th>
-                                        <td> {{ $employ->position->Job_position }} </td>
+                                        <td> {{ $employ->position->Job_position??null }} </td>
                                     </tr>
                                     <tr>
+                                        <th>หน่วยงาน</th>
+                                        <td> {{ $employ->agency->agency_name??null }} </td>
+                                    </tr>
+                                    {{-- <tr>
                                         <th> วันลาสะสม </th>
                                         <td> {{ $employ->Acc_vaca_day }} </td>
                                     </tr>
@@ -63,7 +67,7 @@
                                     <tr>
                                         <th> ลาป่วย </th>
                                         <td> {{ $employ->sick_max }} </td>
-                                    </tr>
+                                    </tr> --}}
                                 </tbody>
                             </table>
                         </div>

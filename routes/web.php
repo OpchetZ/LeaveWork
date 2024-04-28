@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\agencyController;
 use App\Http\Controllers\employController;
 use App\Http\Controllers\historyController;
 use App\Http\Controllers\leaverequestController;
@@ -34,7 +35,7 @@ Route::middleware(['auth'])->group(function (){
     Route::resource('employ',employController::class);
     Route::resource('leavetype',leavetypeController::class);
     Route::resource('leaverequest', leaverequestController::class);
-    
+    Route::resource('agency',agencyController::class);
     Route::get('leaverequest/{id}/pdf', [leaverequestController::class, 'pdf']);
 
 });
@@ -46,3 +47,4 @@ require __DIR__.'/auth.php';
 // Route::resource('employ', 'employController');
 // Route::resource('leavetype', 'leavetypeController');
 // Route::resource('leaverequest', 'leaverequestController');
+// Route::resource('agency', 'agencyController');

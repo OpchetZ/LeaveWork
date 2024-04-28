@@ -10,7 +10,7 @@
                 <div class="card">
                     {{-- <div class="card-header">Leaverequest</div> --}}
                     <div class="card-body">
-                        <div class="row">
+                        {{-- <div class="row">
                             <div class="col-lg-9">
                                 <a href="{{ url('/leaverequest/create') }}" class="btn btn-success btn-sm"
                                     title="Add New leaverequest">
@@ -31,15 +31,15 @@
                                     </div>
                                 </form>
                             </div>
-                        </div>
+                        </div> --}}
 
-                        <br />
-                        <br />
+                        {{-- <br />
+                        <br /> --}}
                         <div class="table-responsive">
                             <table class="table">
                                 <thead>
                                     <tr>
-                                        <th>#</th>
+                                        {{-- <th>#</th> --}}
                                         <th>ชื่อพนักงาน</th>
                                         <th>ประเภทการลา</th>
                                         <th>วันเริ่ม</th>
@@ -49,26 +49,35 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($leaverequest as $item)
+                                    @php
+                                      $leaverequest = $leaverequest->first()  
+                                    @endphp
+                                    {{-- @foreach ($leaverequest as $item) --}}
                                         <tr>
-                                            <td>{{ $loop->iteration }}</td>
-                                            <td>{{ $item->employ->name }}</td>
-                                            <td>{{ $item->leavetype->leave_type_name }}</td>
-                                            <td>{{ $item->start_date->thaidate('วันที่ j M พ.ศ. y') }}</td>
-                                            <td>{{ $item->end_date->thaidate('วันที่ j M พ.ศ. y') }}</td>
-                                            <td>{{ $item->total_leave }}</td>
+                                            {{-- <td>{{ $loop->iteration }}</td> --}}
+                                            <td>{{ $leaverequest->employ->name }}</td>
+                                            <td>{{ $leaverequest->leavetype->leave_type_name }}</td>
+                                            <td>{{ $leaverequest->start_date->thaidate('วันที่ j M พ.ศ. y') }}</td>
+                                            <td>{{ $leaverequest->end_date->thaidate('วันที่ j M พ.ศ. y') }}</td>
+                                            <td>{{ $leaverequest->total_leave }}</td>
                                             <td>
-                                                <a href="{{ url('/leaverequest/' . $item->id) }}"
+                                                <a href="{{ url('/leaverequest/' . $leaverequest->id) }}"
                                                     title="View leaverequest"><button class="btn btn-info btn-sm"><i
                                                             class="fa fa-eye" aria-hidden="true"></i> ดู</button></a>
-                                                <a href="{{ url('/leaverequest/' . $item->id . '/edit') }}"
+                                                <a href="{{ url('/leaverequest/' . $leaverequest->id . '/edit') }}"
                                                     title="Edit leaverequest"><button class="btn btn-primary btn-sm"><i
                                                             class="fa fa-pencil-square-o" aria-hidden="true"></i>
                                                         แก้ไข</button></a>
-                                                        
+                                                <a href="{{ url('/leaverequest/' . $leaverequest->id . '/pdf') }}"
+                                                    title="PDF">
+                                                    <button class="btn btn-success btn-sm">
+                                                        <i class="fa fa-file" aria-hidden="true">พิมพ์ใบลา</i> 
+                                                    </button>
+                                                </a>
+
 
                                                 <form method="POST"
-                                                    action="{{ url('/leaverequest' . '/' . $item->id) }}"
+                                                    action="{{ url('/leaverequest' . '/' . $leaverequest->id) }}"
                                                     accept-charset="UTF-8" style="display:inline">
                                                     {{ method_field('DELETE') }}
                                                     {{ csrf_field() }}
@@ -80,10 +89,10 @@
                                                 </form>
                                             </td>
                                         </tr>
-                                    @endforeach
+                                    {{-- @endforeach --}}
                                 </tbody>
                             </table>
-                            <div class="pagination-wrapper"> {!! $leaverequest->appends(['search' => Request::get('search')])->render() !!} </div>
+                            {{-- <div class="pagination-wrapper"> {!! $leaverequest->appends(['search' => Request::get('search')])->render() !!} </div> --}}
                         </div>
 
                     </div>

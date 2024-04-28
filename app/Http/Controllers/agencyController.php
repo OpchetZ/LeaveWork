@@ -4,13 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests;
+
 use App\Models\agency;
-use App\Models\employ;
-use App\Models\position;
-use App\Models\status;
 use Illuminate\Http\Request;
 
-class employController extends Controller
+class agencyController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -23,18 +21,13 @@ class employController extends Controller
         $perPage = 25;
 
         if (!empty($keyword)) {
-            $employ = employ::where('name', 'LIKE', "%$keyword%")
-                ->orWhere('phone', 'LIKE', "%$keyword%")
-                ->orWhere('Acc_vaca_day', 'LIKE', "%$keyword%")
-                ->orWhere('status_id', 'LIKE', "%$keyword%")
-                ->orWhere('post_id', 'LIKE', "%$keyword%")
-                ->orWhere('agent_id', 'LIKE', "%$keyword%")
+            $agency = agency::where('agency_name', 'LIKE', "%$keyword%")
                 ->latest()->paginate($perPage);
         } else {
-            $employ = employ::latest()->paginate($perPage);
+            $agency = agency::latest()->paginate($perPage);
         }
 
-        return view('employ.index', compact('employ'));
+        return view('agency.index', compact('agency'));
     }
 
     /**
@@ -44,11 +37,7 @@ class employController extends Controller
      */
     public function create()
     {
-        $statuses = status::get();
-        $positions = position::get();
-        $agencies = agency::get();
-
-        return view('employ.create',compact('statuses','positions','agencies'));
+        return view('agency.create');
     }
 
     /**
@@ -63,9 +52,9 @@ class employController extends Controller
         
         $requestData = $request->all();
         
-        employ::create($requestData);
+        agency::create($requestData);
 
-        return redirect('employ')->with('flash_message', 'employ added!');
+        return redirect('agency')->with('flash_message', 'agency added!');
     }
 
     /**
@@ -77,9 +66,9 @@ class employController extends Controller
      */
     public function show($id)
     {
-        $employ = employ::findOrFail($id);
+        $agency = agency::findOrFail($id);
 
-        return view('employ.show', compact('employ'));
+        return view('agency.show', compact('agency'));
     }
 
     /**
@@ -91,12 +80,9 @@ class employController extends Controller
      */
     public function edit($id)
     {
-        $employ = employ::findOrFail($id);
-        $statuses = status::get();
-        $positions = position::get();
-        $agencies = agency::get();
+        $agency = agency::findOrFail($id);
 
-        return view('employ.edit', compact('employ','statuses','positions','agencies'));
+        return view('agency.edit', compact('agency'));
     }
 
     /**
@@ -112,10 +98,10 @@ class employController extends Controller
         
         $requestData = $request->all();
         
-        $employ = employ::findOrFail($id);
-        $employ->update($requestData);
+        $agency = agency::findOrFail($id);
+        $agency->update($requestData);
 
-        return redirect('employ')->with('flash_message', 'employ updated!');
+        return redirect('agency')->with('flash_message', 'agency updated!');
     }
 
     /**
@@ -127,8 +113,8 @@ class employController extends Controller
      */
     public function destroy($id)
     {
-        employ::destroy($id);
+        agency::destroy($id);
 
-        return redirect('employ')->with('flash_message', 'employ deleted!');
+        return redirect('agency')->with('flash_message', 'agency deleted!');
     }
 }

@@ -41,6 +41,20 @@
     </script>
     {!! $errors->first('status_id', '<p class="help-block">:message</p>') !!}
 </div>
+<div class="form-group {{ $errors->has('agent_id') ? 'has-error' : ''}}">
+    <label for="agent_id" class="control-label">{{ 'หน่วยงาน' }}</label>
+    {{-- <input class="form-control" style="border-radius: 12px" name="post_id" type="number" id="post_id" value="{{ isset($employ->post_id) ? $employ->post_id : ''}}" > --}}
+    <select class="form-select" name="agent_id" id="agent_id" required>
+        <option value="">หน่วยงาน</option>
+        @foreach($agencies as $item)
+        <option value="{{ $item->id }}">{{ $item->agency_name }}</option>
+        @endforeach
+    </select>
+    <script>
+        document.querySelector("#agent_id").value = "{{ isset($employ->agent_id) ? $employ->agent_id : ''}}";
+    </script>
+    {!! $errors->first('post_id', '<p class="help-block">:message</p>') !!}
+</div>
 <div class="form-group {{ $errors->has('vaca_max') ? 'has-error' : ''}}">
     <label for="vaca_max" class="control-label">{{ 'พักผ่อน' }}</label>
     <input class="form-control" style="border-radius: 12px" name="vaca_max" type="number" step="0.0" id="vaca_max" value="{{ isset($employ->vaca_max) ? $employ->vaca_max : ''}}" >
