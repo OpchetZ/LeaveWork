@@ -22,12 +22,16 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
+    
     return view('welcome');
 });
 
 Route::get('/dashboard', function () {
+    
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
+
+
 
 Route::middleware(['auth'])->group(function (){
     Route::resource('position',positionController::class);
@@ -35,6 +39,7 @@ Route::middleware(['auth'])->group(function (){
     Route::resource('employ',employController::class);
     Route::resource('leavetype',leavetypeController::class);
     Route::resource('leaverequest', leaverequestController::class);
+    Route::get('history',[leaverequestController::class, 'index2']);
     Route::resource('agency',agencyController::class);
     Route::get('leaverequest/{id}/pdf', [leaverequestController::class, 'pdf']);
 

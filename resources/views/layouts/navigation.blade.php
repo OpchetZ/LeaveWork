@@ -15,9 +15,9 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('หน้าแรก') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('leaverequest.index')" :active="request()->routeIs('leaverequest')">
+                    {{-- <x-nav-link :href="{{ url('/history/') }}" :active="request()->routeIs('history')">
                         {{ __('ประวัติการลา') }}
-                    </x-nav-link>
+                    </x-nav-link> --}}
                     {{-- <x-nav-link :href="route('history.index')" :active="request()->routeIs('history')">
                         {{ __('ประวัติการลา') }}
                     </x-nav-link> --}}

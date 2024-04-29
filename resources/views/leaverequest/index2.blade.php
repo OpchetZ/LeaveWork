@@ -1,7 +1,7 @@
-<x-app-layout title="ใบลา">
+<x-app-layout title="ประวัติการลา">
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('ใบลา') }}
+            {{ __('ประวัติการลา') }}
         </h2>
     </x-slot>
     <div class="container">
@@ -10,11 +10,11 @@
                 <div class="card">
                     {{-- <div class="card-header">Leaverequest</div> --}}
                     <div class="card-body">
-                        {{-- <div class="row">
+                        <div class="row">
                             <div class="col-lg-9">
-                                <a href="{{ url('/leaverequest/create') }}" class="btn btn-success btn-sm"
+                                <a href="{{ url('/dashboard') }}" class="btn btn-warning btn-sm"
                                     title="Add New leaverequest">
-                                    <i class="fa fa-plus" aria-hidden="true"></i> เพิ่มใบลา
+                                    <i class="fa fa-arrow-left" aria-hidden="true"></i> หน้าแรก
                                 </a>
                             </div>
                             <div class="col-lg-3">
@@ -31,10 +31,10 @@
                                     </div>
                                 </form>
                             </div>
-                        </div> --}}
+                        </div>
 
-                        {{-- <br />
-                        <br /> --}}
+                        <br />
+                        <br />
                         <div class="table-responsive">
                             <table class="table">
                                 <thead>
@@ -49,35 +49,33 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @php
-                                      $leaverequest = $leaverequest->first()  
-                                    @endphp
-                                    {{-- @foreach ($leaverequest as $item) --}}
+                                    
+                                    @foreach ($leaverequest as $item)
                                         <tr>
-                                            {{-- <td>{{ $loop->iteration }}</td> --}}
-                                            <td>{{ $leaverequest->employ->name }}</td>
-                                            <td>{{ $leaverequest->leavetype->leave_type_name }}</td>
-                                            <td>{{ $leaverequest->start_date->thaidate('วันที่ j M พ.ศ. y') }}</td>
-                                            <td>{{ $leaverequest->end_date->thaidate('วันที่ j M พ.ศ. y') }}</td>
-                                            <td>{{ $leaverequest->total_leave }}</td>
+                                            <td>{{ $loop->iteration }}</td>
+                                            <td>{{ $item->employ->name }}</td>
+                                            <td>{{ $item->leavetype->leave_type_name }}</td>
+                                            <td>{{ $item->start_date->thaidate('วันที่ j M พ.ศ. y') }}</td>
+                                            <td>{{ $item->end_date->thaidate('วันที่ j M พ.ศ. y') }}</td>
+                                            <td>{{ $item->total_leave }}</td>
                                             <td>
-                                                <a href="{{ url('/leaverequest/' . $leaverequest->id) }}"
+                                                <a href="{{ url('/leaverequest/' . $item->id) }}"
                                                     title="View leaverequest"><button class="btn btn-info btn-sm"><i
                                                             class="fa fa-eye" aria-hidden="true"></i> ดู</button></a>
-                                                <a href="{{ url('/leaverequest/' . $leaverequest->id . '/edit') }}"
+                                                {{-- <a href="{{ url('/leaverequest/' . $item->id . '/edit') }}"
                                                     title="Edit leaverequest"><button class="btn btn-primary btn-sm"><i
                                                             class="fa fa-pencil-square-o" aria-hidden="true"></i>
                                                         แก้ไข</button></a>
-                                                <a href="{{ url('/leaverequest/' . $leaverequest->id . '/pdf') }}"
+                                                <a href="{{ url('/leaverequest/' . $item->id . '/pdf') }}"
                                                     title="PDF">
                                                     <button class="btn btn-success btn-sm">
                                                         <i class="fa fa-file" aria-hidden="true"> พิมพ์ใบลา</i> 
                                                     </button>
-                                                </a>
+                                                </a> --}}
 
 
                                                 <form method="POST"
-                                                    action="{{ url('/leaverequest' . '/' . $leaverequest->id) }}"
+                                                    action="{{ url('/leaverequest' . '/' . $item->id) }}"
                                                     accept-charset="UTF-8" style="display:inline">
                                                     {{ method_field('DELETE') }}
                                                     {{ csrf_field() }}
@@ -89,7 +87,7 @@
                                                 </form>
                                             </td>
                                         </tr>
-                                    {{-- @endforeach --}}
+                                    @endforeach
                                 </tbody>
                             </table>
                             {{-- <div class="pagination-wrapper"> {!! $leaverequest->appends(['search' => Request::get('search')])->render() !!} </div> --}}
