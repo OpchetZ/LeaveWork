@@ -26,7 +26,8 @@ class leaverequestController extends Controller
 
         if (!empty($keyword)) {
             $leaverequest = leaverequest::where('employ_id', 'LIKE', "%$keyword%")
-                ->orWhere('leave_type_name', 'LIKE', "%$keyword%")
+                
+                // ->orWhere('leave_type_name', 'LIKE', "%$keyword%")
                 ->orWhere('start_date', 'LIKE', "%$keyword%")
                 ->orWhere('end_date', 'LIKE', "%$keyword%")
                 ->orWhere('total_leave', 'LIKE', "%$keyword%")
@@ -39,19 +40,7 @@ class leaverequestController extends Controller
     }
     public function index2(Request $request)
     {
-        $keyword = $request->get('search');
-        $perPage = 25;
-
-        if (!empty($keyword)) {
-            $leaverequest = leaverequest::where('employ_id', 'LIKE', "%$keyword%")
-                ->orWhere('leave_type_name', 'LIKE', "%$keyword%")
-                ->orWhere('start_date', 'LIKE', "%$keyword%")
-                ->orWhere('end_date', 'LIKE', "%$keyword%")
-                ->orWhere('total_leave', 'LIKE', "%$keyword%")
-                ->latest()->paginate($perPage);
-        } else {
-            $leaverequest = leaverequest::latest()->paginate($perPage);
-        }
+        $leaverequest = leaverequest::get();
 
         return view('leaverequest.index2', compact('leaverequest'));
     }
@@ -65,7 +54,7 @@ class leaverequestController extends Controller
     {
         $employs = employ::get();
         $leavetype = leavetype::get();
-        return view('leaverequest.create', compact('employs','leavetype'));
+        return view('leaverequest.create', compact('employs', 'leavetype'));
     }
 
     /**
@@ -111,7 +100,7 @@ class leaverequestController extends Controller
         $leaverequest = leaverequest::findOrFail($id);
         $employs = employ::get();
         $leavetype = leavetype::get();
-        return view('leaverequest.edit', compact('leaverequest', 'employs','leavetype'));
+        return view('leaverequest.edit', compact('leaverequest', 'employs', 'leavetype'));
     }
 
     /**
@@ -151,10 +140,10 @@ class leaverequestController extends Controller
         $leaverequest = leaverequest::findOrFail($id);
         // $startdate = Carbon::parse('2024-04-23')->thaidate('วันที่ j เดือน F พ.ศ. y');
         $employs = employ::findOrFail($id);
-        $pdf = Pdf::loadView('leaverequest.pdf', compact('leaverequest','employs'));
+
+       
+        
+        $pdf = Pdf::loadView('leaverequest.pdf', compact('leaverequest', 'employs'));
         return $pdf->stream("leaverequest-{$id}.pdf");
     }
-   
-    
-
 }

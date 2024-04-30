@@ -50,7 +50,7 @@
                                 </thead>
                                 <tbody>
                                     @php
-                                      $leaverequest = $leaverequest->first()  
+                                      $leaverequest = $leaverequest->first();
                                     @endphp
                                     {{-- @foreach ($leaverequest as $item) --}}
                                         <tr>
