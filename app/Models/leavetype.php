@@ -32,7 +32,7 @@ class leavetype extends Model
 
     public function leaveRequests()
     {
-        return $this->hasMany(leaverequest::class, 'leave_type_name', 'leave_type_name');
+        return $this->hasMany(leaverequest::class, 'leave_type_id', 'id');
     }
 
 }

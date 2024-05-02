@@ -2,7 +2,19 @@
 
     <body style="font-size:<?php echo $leaverequest->leavetype->leave_type_name == 'ลาพักผ่อน' ? '15px' : '14px'; ?>;">
         <div class="container" style="margin-left: 75px;">
-            @if ($leaverequest->leavetype->leave_type_name == 'ลาพักผ่อน')
+            @if ($leaverequest->leave_type_id == '1')
+                @php
+
+                    $vacatotal = $employs->Acc_vaca_day + $employs->vaca_max;
+                    $selectedIds = [$leaverequest->employ_id];
+                    $selectleave = [$leaverequest->leave_type_id];
+                    $leavevaca = $leaverequest
+                        ->whereIn('employ_id', $selectedIds)
+                        ->whereIn('leave_type_id', $selectleave)
+                        ->sum('total_leave');
+                    $leavevaca = $leavevaca - $leaverequest->total_leave;
+                    $allleave = $leavevaca + $leaverequest->total_leave;
+                @endphp
                 <div class="row">
                     <div class="col-xs-5">
                         <div>{{ $employs->status->status_name }}</div>
@@ -25,21 +37,11 @@
                         </div>
                     </div>
                 </div>
-                @php
-                    $vacatotal = $employs->Acc_vaca_day + $employs->vaca_max;
-                    $selectedIds = [$leaverequest->employ_id];
-                    $selectleave = [$leaverequest->leave_type_id];
-                    $leavevaca = $leaverequest
-                        ->whereIn('employ_id', $selectedIds)
-                        ->whereIn('leave_type_id', $selectleave)
-                        ->sum('total_leave');
-                    $leavevaca = $leavevaca - $leaverequest->total_leave;
-                    $allleave = $leavevaca + $leaverequest->total_leave;
-                @endphp
+
                 <div class="container">
                     <div class="text-right">
                         <span>
-                            ข้าพเจ้า........{{ $leaverequest->employ->name }}...........ตำแหน่ง.......{{ $employs->position->Job_position }}...........................</span>
+                            ข้าพเจ้า........{{ $employs->name }}...........ตำแหน่ง.......{{ $employs->position->Job_position }}...........................</span>
                     </div>
                     <span>สังกัด...........โรงพยาบาลอ่างทอง...........................กลุ่มงาน.............{{ $employs->agency->agency_name }}....................</span>
                     <span>มีวันลาพักผ่อนสะสม {{ $employs->Acc_vaca_day }} วันทำการมีสิทธิลาพักผ่อนประจำปีนี้อีก
@@ -107,6 +109,48 @@
                 </div>
                 <span>หมายเหตุ : ห้ามลบขีดเขียน</span>
             @else
+                @php
+                    $selectedIds = [$leaverequest->employ_id];
+                    $selectleave = [$leaverequest->leave_type_id];
+                    $firstdate = $leaverequest
+                        ->whereIn('employ_id', $selectedIds)
+                        ->whereIn('leave_type_id', $selectleave)
+                        ->latest()
+                        ->first();
+                    $lastdate = $leaverequest
+                        ->whereIn('employ_id', $selectedIds)
+                        ->whereIn('leave_type_id', $selectleave)
+                        ->skip(1)
+                        ->latest()
+                        ->first();
+
+                    if ($leaverequest->leavetype->leave_type_name == 'ลากิจ') {
+                        $leave = $leaverequest
+                            ->whereIn('employ_id', $selectedIds)
+                            ->whereIn('leave_type_id', $selectleave)
+                            ->sum('total_leave');
+                        $aleave = $leave - $firstdate->total_leave;
+                        $bleave = $firstdate->total_leave;
+                        $cleave = $aleave + $bleave;
+                    } elseif ($leaverequest->leavetype->leave_type_name == 'ลาป่วย') {
+                        $leavesick = $leaverequest
+                            ->whereIn('employ_id', $selectedIds)
+                            ->whereIn('leave_type_id', $selectleave)
+                            ->sum('total_leave');
+                        $sickleave = $leaverequest->total_leave;
+                        $leavesick = $leavesick - $leaverequest->total_leave;
+                        $sickallleave = $leavesick + $leaverequest->total_leave;
+                    } else {
+                        $leavevaca = $leaverequest
+                            ->whereIn('employ_id', $selectedIds)
+                            ->whereIn('leave_type_id', $selectleave)
+                            ->sum('total_leave');
+                        $elsleave = $leaverequest->total_leave;
+                        $leavevaca = $leavevaca - $leaverequest->total_leave;
+                        $ealleave = $leavevaca + $leaverequest->total_leave;
+                    }
+
+                @endphp
                 <div class="row">
                     <div class="col-xs-5">
                         <div>{{ $employs->status->status_name }}</div>
@@ -129,54 +173,21 @@
                         </div>
                     </div>
                 </div>
-                @php
-                    $selectedIds = [$leaverequest->employ_id];
-                    $selectleave = [$leaverequest->leave_type_id];
-                    if ($leaverequest->leavetype->leave_type_name == 'ลากิจ') {
-                        $leavebus = $leaverequest
-                            ->whereIn('employ_id', $selectedIds)
-                            ->whereIn('leave_type_id', $selectleave)
-                            ->sum('total_leave');
-                        $busleave = $leaverequest->total_leave;
-                        $leavebus = $leavebus - $leaverequest->total_leave;
-                        $allleave = $leavebus + $leaverequest->total_leave;
-                    } elseif ($leaverequest->leavetype->leave_type_name == 'ลาป่วย') {
-                        $leavesick = $leaverequest
-                            ->whereIn('employ_id', $selectedIds)
-                            ->whereIn('leave_type_id', $selectleave)
-                            ->sum('total_leave');
-                        $sickleave = $leaverequest->total_leave;
-                        $leavesick = $leavesick - $leaverequest->total_leave;
-                        $sickallleave = $leavesick + $leaverequest->total_leave;
-                    } else {
-                        $leavevaca = $leaverequest
-                            ->whereIn('employ_id', $selectedIds)
-                            ->whereIn('leave_type_id', $selectleave)
-                            ->sum('total_leave');
-                        $elsleave = $leaverequest->total_leave;
-                        $leavevaca = $leavevaca - $leaverequest->total_leave;
-                        $ealleave = $leavevaca + $leaverequest->total_leave;
-                    }
-                    $lastdate = $leaverequest
-                        ->whereIn('employ_id', $selectedIds)
-                        ->whereIn('leave_type_id', $selectleave)
-                        ->skip(1)
-                        ->latest()
-                        ->first();
-                @endphp
+
                 <div class="container">
                     <div class="text-right">
                         <span>
-                            ข้าพเจ้า........{{ $leaverequest->employ->name }}...........ตำแหน่ง.......{{ $employs->position->Job_position }}...........................</span>
+                            ข้าพเจ้า........{{ $employs->name }}...........ตำแหน่ง.......{{ $employs->position->Job_position }}......</span>
                     </div>
                     <span>สังกัด...........โรงพยาบาลอ่างทอง...........................กลุ่มงาน.....................{{ $employs->agency->agency_name }}......................</span>
                     <div style="text-align: center;">ขอ {{ $leaverequest->leavetype->leave_type_name }}
                         เนื่องจาก...................................</div>
-                    <span>ตั้งแต่{{ $leaverequest->start_date->thaidate('วันที่ j เดือน M พ.ศ y') }} ถึงวันที่
-                        {{ $leaverequest->end_date->thaidate('j เดือน M พ.ศ y') }}
-                        มีกำหนด {{ $leaverequest->total_leave }} วัน</span> <br>
+                    <span>ตั้งแต่{{ $firstdate->start_date->thaidate('วันที่ j เดือน M พ.ศ y') }} ถึงวันที่
+                        {{ $firstdate->end_date->thaidate('j เดือน M พ.ศ y') }}
+                        มีกำหนด {{ $firstdate->total_leave }} วัน</span> <br>
                     <span>ข้าพเจ้าได้ {{ $leaverequest->leavetype->leave_type_name }}
-                        ครั้งสุดท้ายตั้งแต่{{ $lastdate ? $lastdate->start_date->thaidate('วันที่ j เดือน M พ.ศ y') : '......................' }}ถึงวันที่ {{ $lastdate ? $lastdate->end_date->thaidate('j เดือน M พ.ศ y') : '.....................' }}รวม
+                        ครั้งสุดท้ายตั้งแต่{{ $lastdate ? $lastdate->start_date->thaidate('วันที่ j เดือน M พ.ศ y') : '......................' }}ถึงวันที่
+                        {{ $lastdate ? $lastdate->end_date->thaidate('j เดือน M พ.ศ y') : '.....................' }}รวม
                         {{ $lastdate->total_leave ?? '...' }}วัน</span>
                     <span>ในระหว่างการลาติดต่อข้าพเจ้าได้ที่.......................................................................................................</span>
                     <br>
@@ -212,9 +223,9 @@
                         </div>
                         <div class="row text-center">
                             <div class="col-xs-4 b">กิจส่วนตัว</div>
-                            <div class="col-xs-4 b">{{ $leavebus ?? null }}<br></div>
-                            <div class="col-xs-4 b">{{ $busleave ?? null }}<br></div>
-                            <div class="col-xs-4 b">{{ $allleave ?? null }}<br></div>
+                            <div class="col-xs-4 b">{{ $aleave ?? null }}<br></div>
+                            <div class="col-xs-4 b">{{ $bleave ?? null }}<br></div>
+                            <div class="col-xs-4 b">{{ $cleave ?? null }}<br></div>
                             <div class="col-xs-6 text-center"><span>
                                     เจ้าพนักงานธุรการปฎิบัติงาน</span></div>
 

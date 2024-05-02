@@ -30,8 +30,8 @@ class status extends Model
      */
     protected $fillable = ['status_name', 'sick_max', 'bus_max', 'vaca_max'];
 
-    public function employ(){
-        return $this->belongsTo(employ::class,'status_id','id');
-    }
+    // public function employ(){
+    //     return $this->belongsTo(employ::class,'status_id','id');
+    // }
     
 }

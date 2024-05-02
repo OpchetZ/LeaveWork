@@ -68,7 +68,7 @@
                                                     title="Edit leaverequest"><button class="btn btn-primary btn-sm"><i
                                                             class="fa fa-pencil-square-o" aria-hidden="true"></i>
                                                         แก้ไข</button></a>
-                                                <a href="{{ url('/leaverequest/' . $leaverequest->id . '/pdf') }}"
+                                                <a href="{{ url('/leaverequest/' . $leaverequest->employ->id . '/pdf') }}"
                                                     title="PDF">
                                                     <button class="btn btn-success btn-sm">
                                                         <i class="fa fa-file" aria-hidden="true"> พิมพ์ใบลา</i> 

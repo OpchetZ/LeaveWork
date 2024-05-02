@@ -135,15 +135,15 @@ class leaverequestController extends Controller
 
         return redirect('leaverequest')->with('flash_message', 'leaverequest deleted!');
     }
-    public function pdf($id)
+    public function pdf($employ_id)
     {
-        $leaverequest = leaverequest::findOrFail($id);
+        $leaverequest = leaverequest::findOrFail($employ_id);
         // $startdate = Carbon::parse('2024-04-23')->thaidate('วันที่ j เดือน F พ.ศ. y');
-        $employs = employ::findOrFail($id);
+        $employs = employ::findOrFail($employ_id);
 
        
         
-        $pdf = Pdf::loadView('leaverequest.pdf', compact('leaverequest', 'employs'));
-        return $pdf->stream("leaverequest-{$id}.pdf");
+        $pdf = Pdf::loadView('leaverequest.pdf', compact('leaverequest','employs'));
+        return $pdf->stream("leaverequest.pdf");
     }
 }
