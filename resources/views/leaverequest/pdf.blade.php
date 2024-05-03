@@ -1,16 +1,20 @@
 <x-boost-pdf title="">
+    @php
+        $selectedIds = [$employs->id];
+        $selectwhere = $leaverequest
+        ->groupby('employ_id', $selectedIds)
+        ->first();
+    @endphp
 
-    <body style="font-size:<?php echo $leaverequest->leavetype->leave_type_name == 'ลาพักผ่อน' ? '15px' : '14px'; ?>;">
+    <body style="font-size:<?php echo $selectwhere->leave_type_id == '1' ? '15px' : '14px'; ?>;">
         <div class="container" style="margin-left: 75px;">
-            @if ($leaverequest->leave_type_id == '1')
+            @if ($selectwhere == '1')
                 @php
 
                     $vacatotal = $employs->Acc_vaca_day + $employs->vaca_max;
-                    $selectedIds = [$leaverequest->employ_id];
-                    $selectleave = [$leaverequest->leave_type_id];
                     $leavevaca = $leaverequest
                         ->whereIn('employ_id', $selectedIds)
-                        ->whereIn('leave_type_id', $selectleave)
+                        ->whereIn('leave_type_id', $selectwhere)
                         ->sum('total_leave');
                     $leavevaca = $leavevaca - $leaverequest->total_leave;
                     $allleave = $leavevaca + $leaverequest->total_leave;
@@ -110,32 +114,28 @@
                 <span>หมายเหตุ : ห้ามลบขีดเขียน</span>
             @else
                 @php
-                    $selectedIds = [$leaverequest->employ_id];
-                    $selectleave = [$leaverequest->leave_type_id];
                     $firstdate = $leaverequest
                         ->whereIn('employ_id', $selectedIds)
-                        ->whereIn('leave_type_id', $selectleave)
-                        ->latest()
+                        ->whereIn('leave_type_id', $selectwhere)
                         ->first();
                     $lastdate = $leaverequest
                         ->whereIn('employ_id', $selectedIds)
-                        ->whereIn('leave_type_id', $selectleave)
+                        ->whereIn('leave_type_id', $selectwhere)
                         ->skip(1)
-                        ->latest()
                         ->first();
 
-                    if ($leaverequest->leavetype->leave_type_name == 'ลากิจ') {
+                    if ($selectwhere == '2') {
                         $leave = $leaverequest
                             ->whereIn('employ_id', $selectedIds)
-                            ->whereIn('leave_type_id', $selectleave)
+                            ->whereIn('leave_type_id', $selectwhere)
                             ->sum('total_leave');
                         $aleave = $leave - $firstdate->total_leave;
                         $bleave = $firstdate->total_leave;
                         $cleave = $aleave + $bleave;
-                    } elseif ($leaverequest->leavetype->leave_type_name == 'ลาป่วย') {
+                    } elseif ($selectwhere == '4') {
                         $leavesick = $leaverequest
                             ->whereIn('employ_id', $selectedIds)
-                            ->whereIn('leave_type_id', $selectleave)
+                            ->whereIn('leave_type_id', $selectwhere)
                             ->sum('total_leave');
                         $sickleave = $leaverequest->total_leave;
                         $leavesick = $leavesick - $leaverequest->total_leave;
@@ -143,11 +143,11 @@
                     } else {
                         $leavevaca = $leaverequest
                             ->whereIn('employ_id', $selectedIds)
-                            ->whereIn('leave_type_id', $selectleave)
+                            ->whereIn('leave_type_id', $selectwhere)
                             ->sum('total_leave');
-                        $elsleave = $leaverequest->total_leave;
-                        $leavevaca = $leavevaca - $leaverequest->total_leave;
-                        $ealleave = $leavevaca + $leaverequest->total_leave;
+                        $elsleave = $selectwhere->total_leave;
+                        $leavevaca = $leavevaca - $selectwhere->total_leave;
+                        $ealleave = $leavevaca + $selectwhere->total_leave;
                     }
 
                 @endphp
@@ -158,14 +158,14 @@
                     <br>
                     <div class="col-xs-6 text-right">
                         <div>เขียนที่ โรงพยาบาลอ่างทอง</div>
-                        <div>{{ $leaverequest->start_date->thaidate('วันที่ j เดือน F พ.ศ. y') }}</div>
+                        <div>{{ $firstdate->start_date->thaidate('วันที่ j เดือน F พ.ศ. y') }}</div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-xs-6">
                         <div>
                             <span> เรื่อง </span>
-                            <span> ขอ{{ $leaverequest->leavetype->leave_type_name }} </span>
+                            <span> ขอ{{ $selectwhere->leavetype->leave_type_name }} </span>
                         </div>
                         <div>
                             <span> เรียน </span>
@@ -180,12 +180,12 @@
                             ข้าพเจ้า........{{ $employs->name }}...........ตำแหน่ง.......{{ $employs->position->Job_position }}......</span>
                     </div>
                     <span>สังกัด...........โรงพยาบาลอ่างทอง...........................กลุ่มงาน.....................{{ $employs->agency->agency_name }}......................</span>
-                    <div style="text-align: center;">ขอ {{ $leaverequest->leavetype->leave_type_name }}
+                    <div style="text-align: center;">ขอ {{ $selectwhere->leavetype->leave_type_name }}
                         เนื่องจาก...................................</div>
                     <span>ตั้งแต่{{ $firstdate->start_date->thaidate('วันที่ j เดือน M พ.ศ y') }} ถึงวันที่
                         {{ $firstdate->end_date->thaidate('j เดือน M พ.ศ y') }}
                         มีกำหนด {{ $firstdate->total_leave }} วัน</span> <br>
-                    <span>ข้าพเจ้าได้ {{ $leaverequest->leavetype->leave_type_name }}
+                    <span>ข้าพเจ้าได้ {{ $selectwhere->leavetype->leave_type_name }}
                         ครั้งสุดท้ายตั้งแต่{{ $lastdate ? $lastdate->start_date->thaidate('วันที่ j เดือน M พ.ศ y') : '......................' }}ถึงวันที่
                         {{ $lastdate ? $lastdate->end_date->thaidate('j เดือน M พ.ศ y') : '.....................' }}รวม
                         {{ $lastdate->total_leave ?? '...' }}วัน</span>
@@ -199,7 +199,7 @@
                     <div class="col-xs-6">
                         <span> ขอแสดงความนับถือ</span><br>
                         <span>ลงชื่อ.................................</span><br>
-                        <span>(.......{{ $leaverequest->employ->name }}........)</span>
+                        <span>(.......{{ $employs->name }}........)</span>
                     </div>
                 </div>
                 <div class="row">
