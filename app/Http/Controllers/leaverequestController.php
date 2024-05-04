@@ -150,7 +150,7 @@ class leaverequestController extends Controller
     {
         $leaverequest = leaverequest::findOrFail($id);
         // $startdate = Carbon::parse('2024-04-23')->thaidate('วันที่ j เดือน F พ.ศ. y');
-        $employs = employ::findOrFail($id);
+        $employs = employ::get();
         $pdf = Pdf::loadView('leaverequest.pdf', compact('leaverequest','employs'));
         return $pdf->stream("leaverequest-{$id}.pdf");
     }

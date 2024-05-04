@@ -4,7 +4,7 @@
             @if ($leaverequest->leavetype->leave_type_name == 'ลาพักผ่อน')
                 <div class="row">
                     <div class="col-xs-5">
-                        <div>{{ $employs->status->status_name }}</div>
+                        <div>{{ $leaverequest->employ->status->status_name }}</div>
                     </div>
                     <br>
                     <div class="col-xs-6 text-right">
@@ -25,7 +25,6 @@
                     </div>
                 </div>
                 @php
-                    $vacatotal = $employs->Acc_vaca_day + $employs->vaca_max;
                     $selectedIds = [$leaverequest->employ_id];
                     $selectleave = [$leaverequest->leave_type_id];
                     $leavevaca = $leaverequest
@@ -34,19 +33,21 @@
                         ->sum('total_leave');
                     $leavevaca = $leavevaca - $leaverequest->total_leave;
                     $allleave = $leavevaca + $leaverequest->total_leave;
+                    $accleave = $leaverequest->employ->vaca_max - $allleave;
+                    $vacatotal = $accleave + $leaverequest->employ->Acc_vaca_day;
                 @endphp
                 <div class="container">
                     <div class="text-right">
                         <span>
                             ข้าพเจ้า........{{ $leaverequest->employ->name }}..ตำแหน่ง.......{{ $leaverequest->employ->position->Job_position }}......</span>
                     </div>
-                    <span>สังกัด...........โรงพยาบาลอ่างทอง...........................กลุ่มงาน.............{{ $employs->agency->agency_name }}....................</span>
-                    <span>มีวันลาพักผ่อนสะสม {{ $employs->Acc_vaca_day }} วันทำการมีสิทธิลาพักผ่อนประจำปีนี้อีก
-                        {{ $employs->vaca_max }} วันทำการรวมเป็น {{ $vacatotal }} วัน<br></span>
+                    <span>สังกัด...........โรงพยาบาลอ่างทอง...........................กลุ่มงาน.............{{ $leaverequest->employ->agency->agency_name }}....................</span>
+                    <span>มีวันลาพักผ่อนสะสม {{ $leaverequest->employ->Acc_vaca_day }} วันทำการมีสิทธิลาพักผ่อนประจำปีนี้อีก
+                        {{ $accleave }} วันทำการรวมเป็น {{ $vacatotal }} วัน<br></span>
                     <span>ขอลาพักผ่อนตั้งแต่{{ $leaverequest->start_date->thaidate('วันที่ j เดือน M พ.ศ. y') }}ถึงวันที่{{ $leaverequest->end_date->thaidate('j เดือน Mพ.ศ. y') }}
                         <br> </span>
                     <span>มีกำหนด{{ $leaverequest->total_leave }}วันในระหว่างการลาติดต่อข้าพเจ้าได้ที่..............................................................................</span>
-                    <span>..........................................................หมายเลขโทรศัพท์.............{{ $employs->phone }}....................................</span>
+                    <span>..........................................................หมายเลขโทรศัพท์.............{{ $leaverequest->employ->phone }}....................................</span>
                 </div>
                 <br>
                 <div class="row">
