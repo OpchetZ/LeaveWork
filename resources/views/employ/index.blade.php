@@ -45,10 +45,10 @@
                                         <th>ตำแหน่ง</th>
                                         <th>สถาณะ</th>
                                         <th>หน่วยงาน</th>
-                                        {{-- <th>วันหยุดสะสม</th>
+                                        <th>วันหยุดสะสม</th>
                                         <th>ลาพักผ่อน</th>
                                         <th>ลากิจ</th>
-                                        <th>ลาป่วย</th> --}}
+                                        <th>ลาป่วย</th>
                                         <th>Actions</th>
                                     </tr>
                                 </thead>
@@ -61,10 +61,10 @@
                                             <td>{{ $item->position->Job_position??null }}</td>
                                             <td>{{ $item->status->status_name??null }}</td>
                                             <td>{{ $item->agency->agency_name??null }}</td>
-                                            {{-- <td>{{ $item->Acc_vaca_day }}</td>
+                                            <td>{{ $item->Acc_vaca_day }}</td>
                                             <td>{{ $item->vaca_max }}</td>
                                             <td>{{ $item->bus_max }}</td>
-                                            <td>{{ $item->sick_max }}</td> --}}
+                                            <td>{{ $item->sick_max }}</td>
                                             <td>
                                                 <a href="{{ url('/employ/' . $item->id) }}" title="View employ"><button
                                                         class="btn btn-info btn-sm"><i class="fa fa-eye"

@@ -35,6 +35,16 @@
                     $allleave = $leavevaca + $leaverequest->total_leave;
                     $accleave = $leaverequest->employ->vaca_max - $allleave;
                     $vacatotal = $accleave + $leaverequest->employ->Acc_vaca_day;
+                    $accday = $leaverequest->employ->Acc_vaca_day;
+                if ($accday != 0) {
+                    if ($accleave < 0) {
+                        $accleave = 0;
+                        $accday = $leaverequest->employ->Acc_vaca_day - $leaverequest->total_leave;
+                    }
+                }else{
+                    $accday = 0;
+                    
+                }
                 @endphp
                 <div class="container">
                     <div class="text-right">
@@ -42,12 +52,12 @@
                             ข้าพเจ้า........{{ $leaverequest->employ->name }}..ตำแหน่ง.......{{ $leaverequest->employ->position->Job_position }}......</span>
                     </div>
                     <span>สังกัด...........โรงพยาบาลอ่างทอง...........................กลุ่มงาน.............{{ $leaverequest->employ->agency->agency_name }}....................</span>
-                    <span>มีวันลาพักผ่อนสะสม {{ $leaverequest->employ->Acc_vaca_day }} วันทำการมีสิทธิลาพักผ่อนประจำปีนี้อีก
-                        {{ $accleave }} วันทำการรวมเป็น {{ $vacatotal }} วัน<br></span>
+                    <span>มีวันลาพักผ่อนสะสม {{ $accday }} วันทำการมีสิทธิลาพักผ่อนประจำปีนี้อีก
+                        {{ $accleave }} วันทำการ รวมเป็น {{ $vacatotal }} วัน<br></span>
                     <span>ขอลาพักผ่อนตั้งแต่{{ $leaverequest->start_date->thaidate('วันที่ j เดือน M พ.ศ. y') }}ถึงวันที่{{ $leaverequest->end_date->thaidate('j เดือน Mพ.ศ. y') }}
-                        <br> </span>
-                    <span>มีกำหนด{{ $leaverequest->total_leave }}วันในระหว่างการลาติดต่อข้าพเจ้าได้ที่..............................................................................</span>
-                    <span>..........................................................หมายเลขโทรศัพท์.............{{ $leaverequest->employ->phone }}....................................</span>
+                     </span>
+                    <span>มีกำหนด{{ $leaverequest->total_leave }}วัน ในระหว่างการลาติดต่อข้าพเจ้าได้ที่.......................................................................................</span>
+                    <span>..........................................................หมายเลขโทรศัพท์.............{{ $leaverequest->employ->phone }}......................</span>
                 </div>
                 <br>
                 <div class="row">
