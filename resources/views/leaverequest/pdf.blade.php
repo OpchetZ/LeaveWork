@@ -33,17 +33,19 @@
                         ->sum('total_leave');
                     $leavevaca = $leavevaca - $leaverequest->total_leave;
                     $allleave = $leavevaca + $leaverequest->total_leave;
-                    $accleave = $leaverequest->employ->vaca_max - $allleave;
-                    $vacatotal = $accleave + $leaverequest->employ->Acc_vaca_day;
+                    $accleave = $leaverequest->employ->vaca_max - $leavevaca;
                     $accday = $leaverequest->employ->Acc_vaca_day;
+                    $vacatotal = $accday + $accleave;
                 if ($accday != 0) {
-                    if ($accleave < 0) {
+                    if ($accleave = 0) {
                         $accleave = 0;
                         $accday = $leaverequest->employ->Acc_vaca_day - $leaverequest->total_leave;
+                        $vacatotal = $accday + $accleave;
                     }
-                }else{
+                }else if($accleave > 0){
                     $accday = 0;
-                    
+                    $accleave = $leaverequest->employ->vaca_max - $leavevaca;
+                    $vacatotal = $accday + $accleave;
                 }
                 @endphp
                 <div class="container">
