@@ -37,9 +37,12 @@
                     $accday = $leaverequest->employ->Acc_vaca_day;
                     $vacatotal = $accday + $accleave;
                 if ($accday != 0) {
-                    if ($accleave = 0) {
+                    if ($allleave > $leaverequest->employ->vaca_max) {
+                        $odd = $allleave - $leaverequest->employ->vaca_max;
+                        $odd2 = $allleave - $leaverequest->employ->vaca_max;  
+                        $accday = $leaverequest->employ->Acc_vaca_day - $odd;
+                        
                         $accleave = 0;
-                        $accday = $leaverequest->employ->Acc_vaca_day - $leaverequest->total_leave;
                         $vacatotal = $accday + $accleave;
                     }
                 }else if($accleave > 0){
