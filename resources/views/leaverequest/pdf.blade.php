@@ -39,7 +39,7 @@
                 if ($accday != 0) {
                     if ($allleave > $leaverequest->employ->vaca_max) {
                         $odd = $allleave - $leaverequest->employ->vaca_max;
-                        $odd2 = $allleave - $leaverequest->employ->vaca_max;  
+                        $odd = $odd - $leaverequest->total_leave;  
                         $accday = $leaverequest->employ->Acc_vaca_day - $odd;
                         
                         $accleave = 0;
@@ -121,7 +121,7 @@
             @else
                 <div class="row">
                     <div class="col-xs-5">
-                        <div>{{ $employs->status->status_name }}</div>
+                        <div>{{ $leaverequest->employ->status->status_name }}</div>
                     </div>
                     <br>
                     <div class="col-xs-6 text-right">
@@ -179,9 +179,9 @@
                 <div class="container">
                     <div class="text-right">
                         <span>
-                            ข้าพเจ้า........{{ $leaverequest->employ->name }}...........ตำแหน่ง.......{{ $employs->position->Job_position }}...........................</span>
+                            ข้าพเจ้า........{{ $leaverequest->employ->name }}...........ตำแหน่ง.......{{ $leaverequest->employ->position->Job_position }}....</span>
                     </div>
-                    <span>สังกัด...........โรงพยาบาลอ่างทอง...........................กลุ่มงาน.....................{{ $employs->agency->agency_name }}......................</span>
+                    <span>สังกัด...........โรงพยาบาลอ่างทอง...........................กลุ่มงาน.....................{{ $leaverequest->employ->agency->agency_name }}......................</span>
                     <div style="text-align: center;">ขอ {{ $leaverequest->leavetype->leave_type_name }}
                         เนื่องจาก...................................</div>
                     <span>ตั้งแต่{{ $leaverequest->start_date->thaidate('วันที่ j เดือน M พ.ศ y') }} ถึงวันที่
@@ -192,7 +192,7 @@
                         {{ $lastdate->total_leave ?? '...' }}วัน</span>
                     <span>ในระหว่างการลาติดต่อข้าพเจ้าได้ที่.......................................................................................................</span>
                     <br>
-                    <span>..........................................................หมายเลขโทรศัพท์.............{{ $employs->phone }}....................................</span>
+                    <span>..........................................................หมายเลขโทรศัพท์.............{{ $leaverequest->employ->phone }}....................................</span>
                 </div>
                 <br>
                 <div class="row">
