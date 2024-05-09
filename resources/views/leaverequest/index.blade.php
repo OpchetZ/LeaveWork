@@ -61,9 +61,9 @@
                                             <td>{{ $leaverequest->end_date->thaidate('วันที่ j M พ.ศ. y') }}</td>
                                             <td>{{ $leaverequest->total_leave }}</td>
                                             <td>
-                                                <a href="{{ url('/leaverequest/' . $leaverequest->id) }}"
+                                                {{-- <a href="{{ url('/leaverequest/' . $leaverequest->id) }}"
                                                     title="View leaverequest"><button class="btn btn-info btn-sm"><i
-                                                            class="fa fa-eye" aria-hidden="true"></i> ดู</button></a>
+                                                            class="fa fa-eye" aria-hidden="true"></i> ดู</button></a> --}}
                                                 <a href="{{ url('/leaverequest/' . $leaverequest->id . '/edit') }}"
                                                     title="Edit leaverequest"><button class="btn btn-primary btn-sm"><i
                                                             class="fa fa-pencil-square-o" aria-hidden="true"></i>

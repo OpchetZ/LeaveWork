@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests;
+use App\Models\agency;
 use App\Models\employ;
 use App\Models\history;
 use App\Models\leaverequest;
@@ -21,39 +22,22 @@ class leaverequestController extends Controller
      */
     public function index(Request $request)
     {
-        $keyword = $request->get('search');
-        $perPage = 25;
-
-        if (!empty($keyword)) {
-            $leaverequest = leaverequest::where('employ_id', 'LIKE', "%$keyword%")
-                ->orWhere('leave_type_name', 'LIKE', "%$keyword%")
-                ->orWhere('start_date', 'LIKE', "%$keyword%")
-                ->orWhere('end_date', 'LIKE', "%$keyword%")
-                ->orWhere('total_leave', 'LIKE', "%$keyword%")
-                ->latest()->paginate($perPage);
-        } else {
-            $leaverequest = leaverequest::latest()->paginate($perPage);
-        }
-
+        $leaverequest = leaverequest::latest();
         return view('leaverequest.index', compact('leaverequest'));
     }
     public function index2(Request $request)
     {
-        $keyword = $request->get('search');
-        $perPage = 25;
-
-        if (!empty($keyword)) {
-            $leaverequest = leaverequest::where('employ_id', 'LIKE', "%$keyword%")
-                ->orWhere('leave_type_name', 'LIKE', "%$keyword%")
-                ->orWhere('start_date', 'LIKE', "%$keyword%")
-                ->orWhere('end_date', 'LIKE', "%$keyword%")
-                ->orWhere('total_leave', 'LIKE', "%$keyword%")
-                ->latest()->paginate($perPage);
-        } else {
-            $leaverequest = leaverequest::latest()->paginate($perPage);
-        }
-
-        return view('leaverequest.index2', compact('leaverequest'));
+        $leaverequest = leaverequest::get();
+        $employs = employ::get();
+        $agen = agency::get();
+        $sort = $request->get('agen');
+    switch ($sort) {
+        case "ศูนย์ผ้าและซักฟอก": $leaverequest = $leaverequest->employ->agency->whereIn('agency_name', $sort); break;
+        case "งานสารบรรณ": $leaverequest = $leaverequest->employ->agency->whereIn('agency_name', $sort); break;
+        case "งานสนาม": $leaverequest = $leaverequest->employ->agency->whereIn('agency_name', $sort); break;
+    }
+    
+        return view('leaverequest.index2', compact('leaverequest','employs','agen'));
     }
 
     /**

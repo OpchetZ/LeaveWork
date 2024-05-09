@@ -11,7 +11,7 @@
                     {{-- <div class="card-header">leaverequest {{ $leaverequest->id }}</div> --}}
                     <div class="card-body">
                         
-                        <a href="{{ url('/leaverequest') }}" title="Back"><button class="btn btn-warning btn-sm"><i
+                        <a href="{{ url('/history') }}" title="Back"><button class="btn btn-warning btn-sm"><i
                                     class="fa fa-arrow-left" aria-hidden="true"></i> Back</button></a>
                         <a href="{{ url('/leaverequest/' . $leaverequest->id . '/edit') }}"
                             title="Edit leaverequest"><button class="btn btn-primary btn-sm"><i
