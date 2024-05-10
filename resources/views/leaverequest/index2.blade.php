@@ -1,4 +1,4 @@
-<x-app-layout title="ประวัติการลา">
+<x-app-layout title="ทะเบียนวันลา">
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ __('ทะเบียนวันลา') }}
@@ -11,25 +11,28 @@
                     {{-- <div class="card-header">Leaverequest</div> --}}
                     <div class="card-body">
                         <div class="row">
-                            <div class="col-lg-5">
+                            <div class="col-lg-3">
                                 <a href="{{ url('/dashboard') }}" class="btn btn-warning btn-sm"
                                     title="Add New leaverequest">
                                     <i class="fa fa-arrow-left" aria-hidden="true"></i> หน้าแรก
                                 </a>
                             </div>
                             <div class="col-lg-3">
-                                <select class="form-select" name="agen" id="agen" required>
-                                    <option value="">หน่วยงาน</option>
-                                    @foreach($agen as $item)
-                                    <option value="{{ $item->id }}">{{ $item->agency_name }}</option>
-                                    @endforeach
-                                </select>
-                                <script>
-                                    document.querySelector("#agen").value = "{{ request('agen') ? request('agen') : '' }}";
-                                </script>
+                                <form action="{{ url('/history') }}" method="GET">
+                                    <select class="form-select" name="agen" id="agen" required>
+                                        <option value="">หน่วยงาน</option>
+                                        @foreach($agen as $item)
+                                        <option value="{{ $item->id }}">{{ $item->agency_name }}</option>
+                                        @endforeach
+                                    </select>
+                                    <script>
+                                        document.querySelector("#agen").value = "{{ request('agen') ? request('agen') : '' }}";
+                                    </script>
+                                    <button style="font-family: Frutiger" class="col-md-12 btn btn-primary" type="submit">Search</button>
+                                </form>  
                             </div>
                             <div class="col-lg-3">
-                                <select class="form-select" name="employ_id" id="employ_id" required>
+                                <select class="form-select" name="employ" id="employ" required>
                                     <option value="">รายชื่อ</option>
                                     @foreach($employs as $item)
                                     <option value="{{ $item->id }}">{{ $item->name }}</option>
@@ -58,7 +61,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-
+                                @if($filiter->isNotEmpty())
                                 @foreach ($leaverequest as $leaverequest)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
@@ -97,6 +100,9 @@
                                         </td>
                                     </tr>
                                 @endforeach
+                                @else
+                                    
+                                @endif
                             </tbody>
                         </table>
                         {{-- <div class="pagination-wrapper"> {!! $leaverequest->appends(['search' => Request::get('search')])->render() !!} </div> --}}

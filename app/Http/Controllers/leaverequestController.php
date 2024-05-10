@@ -27,17 +27,16 @@ class leaverequestController extends Controller
     }
     public function index2(Request $request)
     {
-        $leaverequest = leaverequest::get();
+        $search = $request->get('employ');
         $employs = employ::get();
         $agen = agency::get();
-        $sort = $request->get('agen');
-    switch ($sort) {
-        case "ศูนย์ผ้าและซักฟอก": $leaverequest = $leaverequest->employ->agency->whereIn('agency_name', $sort); break;
-        case "งานสารบรรณ": $leaverequest = $leaverequest->employ->agency->whereIn('agency_name', $sort); break;
-        case "งานสนาม": $leaverequest = $leaverequest->employ->agency->whereIn('agency_name', $sort); break;
-    }
+        $leaverequest = leaverequest::get();
+        $filiter = collect([]);
+        if ($search) {
+            $filiter = $leaverequest->employ->whereIn('name',$search);
+        }
     
-        return view('leaverequest.index2', compact('leaverequest','employs','agen'));
+        return view('leaverequest.index2', compact('leaverequest','employs','agen','filiter'));
     }
 
     /**
