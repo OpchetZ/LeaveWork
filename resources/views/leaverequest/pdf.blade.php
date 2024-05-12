@@ -1,5 +1,5 @@
 <x-boost-pdf title="">
-    <body style="font-size:<?php echo $leaverequest->leavetype->leave_type_name == 'ลาพักผ่อน' ? '15px' : '14px'; ?>;">
+    <body style="font-size:<?php echo $leaverequest->leavetype->leave_type_name == 'ลาพักผ่อน' ? '15px' : '15px'; ?>;">
         <div class="container" style="margin-left: 75px;">
             @if ($leaverequest->leavetype->leave_type_name == 'ลาพักผ่อน')
                 <div class="row">
@@ -52,14 +52,18 @@
                 }
                 @endphp
                 <div class="container">
-                    <div class="text-right">
-                        <span>
-                            ข้าพเจ้า........{{ $leaverequest->employ->name }}..ตำแหน่ง.......{{ $leaverequest->employ->position->Job_position }}......</span>
+                    <div class="row">
+                        <span class="col-sm-3"> </span>
+                        <span class="col-sm-3">ข้าพเจ้า</span>
+                        <span class="col-sm">{{ $leaverequest->employ->name }}</span>
+                        <span class="col-sm-3">ตำแหน่ง</span>
+                        <span class="col-sm">{{ $leaverequest->employ->position->Job_position }}</span>
+                            
                     </div>
-                    <span>สังกัด...........โรงพยาบาลอ่างทอง...........................กลุ่มงาน.............{{ $leaverequest->employ->agency->agency_name }}....................</span>
+                    <span>สังกัด...........โรงพยาบาลอ่างทอง...........................กลุ่มงาน.............{{ $leaverequest->employ->agency->agency_name }}.........</span>
                     <span>มีวันลาพักผ่อนสะสม {{ $accday }} วันทำการมีสิทธิลาพักผ่อนประจำปีนี้อีก
                         {{ $accleave }} วันทำการ รวมเป็น {{ $vacatotal }} วัน<br></span>
-                    <span>ขอลาพักผ่อนตั้งแต่{{ $leaverequest->start_date->thaidate('วันที่ j เดือน M พ.ศ. y') }}ถึงวันที่{{ $leaverequest->end_date->thaidate('j เดือน Mพ.ศ. y') }}
+                    <span>ขอลาพักผ่อนตั้งแต่ {{ $leaverequest->start_date->thaidate('วันที่ j เดือน M พ.ศ. y') }} ถึงวันที่{{ $leaverequest->end_date->thaidate('j เดือน Mพ.ศ. y') }}
                      </span>
                     <span>มีกำหนด{{ $leaverequest->total_leave }}วัน ในระหว่างการลาติดต่อข้าพเจ้าได้ที่.......................................................................................</span>
                     <span>..........................................................หมายเลขโทรศัพท์.............{{ $leaverequest->employ->phone }}......................</span>
@@ -70,7 +74,7 @@
                     <div class="col-xs-6">
                         <span> ขอแสดงความนับถือ</span><br>
                         <span>ลงชื่อ.................................</span><br>
-                        <span>(.......{{ $leaverequest->employ->name }}........)</span>
+                        <span>({{ $leaverequest->employ->name }})</span>
                     </div>
                 </div>
                 <div class="row">
@@ -97,8 +101,8 @@
                     <div class="col-xs-6">
                         <span> ความเห็นผู้บังคับบัญชา</span><br>
                         <span>.........................................................</span> <br>
-                        <span>ลงชื่อ.........(นางพลับพลึง จำพรด)..............</span><br>
-                        <span>ตำแหน่ง...หัวหน้ากลุ่มงานบริหารทั่วไป...</span> <br>
+                        <span>ลงชื่อ  (นางพลับพลึง จำพรด)   </span><br>
+                        <span>ตำแหน่ง   หัวหน้ากลุ่มงานบริหารทั่วไป  </span> <br>
                         <span>วันที่.................................................</span>
                     </div>
                 </div>
@@ -112,8 +116,8 @@
                     <div class="col-xs-6">
                         <span> คำสั่ง ( ) อนุญาต ( ) ไม่อนุญาต</span><br>
                         <span>.........................................................</span> <br>
-                        <span>ลงชื่อ......(นางวราภรณ์ วังเมธากุล)..........</span><br>
-                        <span>ตำแหน่ง...รองผู้อำนวยการฝ่ายบริหาร...</span> <br>
+                        <span>ลงชื่อ  (นางวราภรณ์ วังเมธากุล)   </span><br>
+                        <span>ตำแหน่ง   รองผู้อำนวยการฝ่ายบริหาร  </span> <br>
                         <span>วันที่.................................................</span>
                     </div>
                 </div>
@@ -177,22 +181,25 @@
                         ->first();
                 @endphp
                 <div class="container">
-                    <div class="text-right">
-                        <span>
-                            ข้าพเจ้า........{{ $leaverequest->employ->name }}...........ตำแหน่ง.......{{ $leaverequest->employ->position->Job_position }}....</span>
+                    <div class="row">
+                        <span class="col-sm-3"> </span>
+                        <span class="col-sm-3">ข้าพเจ้า</span>
+                        <span class="col-sm">{{ $leaverequest->employ->name }}</span>
+                        <span class="col-sm-3">ตำแหน่ง</span>
+                        <span class="col-sm">{{ $leaverequest->employ->position->Job_position }}</span>
+                            
                     </div>
-                    <span>สังกัด...........โรงพยาบาลอ่างทอง...........................กลุ่มงาน.....................{{ $leaverequest->employ->agency->agency_name }}......................</span>
+                    <span>สังกัด...........โรงพยาบาลอ่างทอง.....................กลุ่มงาน............{{ $leaverequest->employ->agency->agency_name }}..........</span>
                     <div style="text-align: center;">ขอ {{ $leaverequest->leavetype->leave_type_name }}
                         เนื่องจาก...................................</div>
                     <span>ตั้งแต่{{ $leaverequest->start_date->thaidate('วันที่ j เดือน M พ.ศ y') }} ถึงวันที่
                         {{ $leaverequest->end_date->thaidate('j เดือน M พ.ศ y') }}
                         มีกำหนด {{ $leaverequest->total_leave }} วัน</span> <br>
                     <span>ข้าพเจ้าได้ {{ $leaverequest->leavetype->leave_type_name }}
-                        ครั้งสุดท้ายตั้งแต่{{ $lastdate ? $lastdate->start_date->thaidate('วันที่ j เดือน M พ.ศ y') : '......................' }}ถึงวันที่ {{ $lastdate ? $lastdate->end_date->thaidate('j เดือน M พ.ศ y') : '.....................' }}รวม
-                        {{ $lastdate->total_leave ?? '...' }}วัน</span>
-                    <span>ในระหว่างการลาติดต่อข้าพเจ้าได้ที่.......................................................................................................</span>
+                        ครั้งสุดท้ายตั้งแต่{{ $lastdate ? $lastdate->start_date->thaidate('วันที่ j เดือน M พ.ศ y') : '......................' }}ถึงวันที่ {{ $lastdate ? $lastdate->end_date->thaidate('j เดือน M พ.ศ y') : '.....................' }}</span><br>
+                    <span>รวม{{ $lastdate->total_leave ?? '...' }}วัน ในระหว่างการลาติดต่อข้าพเจ้าได้ที่...............................................................................</span>
                     <br>
-                    <span>..........................................................หมายเลขโทรศัพท์.............{{ $leaverequest->employ->phone }}....................................</span>
+                    <span>..........................................................หมายเลขโทรศัพท์.............{{ $leaverequest->employ->phone }}............................</span>
                 </div>
                 <br>
                 <div class="row">
@@ -200,7 +207,7 @@
                     <div class="col-xs-6">
                         <span> ขอแสดงความนับถือ</span><br>
                         <span>ลงชื่อ.................................</span><br>
-                        <span>(.......{{ $leaverequest->employ->name }}........)</span>
+                        <span>({{ $leaverequest->employ->name }})</span>
                     </div>
                 </div>
                 <div class="row">
@@ -231,13 +238,6 @@
                                     เจ้าพนักงานธุรการปฎิบัติงาน</span></div>
 
                         </div>
-                        <div class="row text-center">
-                            <div class="col-xs-4 b">คลอดบุตร</div>
-                            <div class="col-xs-4 b">{{ $leavevaca ?? null }}<br></div>
-                            <div class="col-xs-4 b">{{ $elsleave ?? null }}<br></div>
-                            <div class="col-xs-4 b">{{ $ealleave ?? null }}<br></div>
-                        </div>
-
                     </div>
 
 
@@ -248,8 +248,8 @@
                     <div class="col-xs-6">
                         <span> ความเห็นผู้บังคับบัญชา</span><br>
                         <span>.........................................................</span> <br>
-                        <span>ลงชื่อ.........(นางพลับพลึง จำพรด)..............</span><br>
-                        <span>ตำแหน่ง.......หัวหน้ากลุ่มงานบริหารทั่วไป...</span> <br>
+                        <span>ลงชื่อ  (นางพลับพลึง จำพรด)  </span><br>
+                        <span>ตำแหน่ง  หัวหน้ากลุ่มงานบริหารทั่วไป  </span> <br>
                         <span>วันที่.................................................</span>
                     </div>
                 </div>
@@ -263,8 +263,8 @@
                     <div class="col-xs-6">
                         <span> คำสั่ง ( ) อนุญาต ( ) ไม่อนุญาต</span><br>
                         <span>.........................................................</span> <br>
-                        <span>ลงชื่อ.........(นางวราภรณ์ วังเมธากุล)..........</span><br>
-                        <span>ตำแหน่ง.......รองผู้อำนวยการฝ่ายบริหาร...</span> <br>
+                        <span>ลงชื่อ  (นางวราภรณ์ วังเมธากุล)  </span><br>
+                        <span>ตำแหน่ง  รองผู้อำนวยการฝ่ายบริหาร   </span> <br>
                         <span>วันที่.................................................</span>
                     </div>
                 </div>
