@@ -53,8 +53,8 @@
                     }
                 @endphp
                 <div class="container">
-                    <div class="text-center">
-                        <span class="p-5">ข้าพเจ้า {{ $leaverequest->employ->name }} </span><span> ตำแหน่ง
+                    <div class="">
+                        <span id="nam">ข้าพเจ้า {{ $leaverequest->employ->name }} </span><span id="posi"> ตำแหน่ง
                             {{ $leaverequest->employ->position->Job_position }}</span>
                     </div>
                     <span>สังกัด...........โรงพยาบาลอ่างทอง...........................กลุ่มงาน.............{{ $leaverequest->employ->agency->agency_name }}.........</span>
@@ -180,8 +180,8 @@
                         ->first();
                 @endphp
                 <div class="container">
-                    <div class="text-center">
-                        <span class="p-5">ข้าพเจ้า {{ $leaverequest->employ->name }} </span><span> ตำแหน่ง
+                    <div class="">
+                        <span id="nam">ข้าพเจ้า {{ $leaverequest->employ->name }} </span><span id="posi"> ตำแหน่ง
                             {{ $leaverequest->employ->position->Job_position }}</span>
                     </div>
                     <span>สังกัด...........โรงพยาบาลอ่างทอง.....................กลุ่มงาน............{{ $leaverequest->employ->agency->agency_name }}..........</span>
