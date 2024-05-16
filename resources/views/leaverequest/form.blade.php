@@ -26,6 +26,11 @@
 </select>
     {!! $errors->first('leave_type_id', '<p class="help-block">:message</p>') !!}
 </div>
+<div class="form-group {{ $errors->has('reason') ? 'has-error' : ''}}">
+    <label for="reason" class="control-label">{{ 'เนื่องจาก' }}</label>
+    <textarea class="form-control" rows="5" name="reason" type="textarea" id="reason" >{{ isset($leaverequest->reason) ? $leaverequest->reason : ''}}</textarea>
+    {!! $errors->first('reason', '<p class="help-block">:message</p>') !!}
+</div>
 <div class="form-group {{ $errors->has('start_date') ? 'has-error' : ''}}">
     <label for="start_date" class="control-label">{{ 'วันเริ่ม' }}</label>
     <input class="form-control" style="border-radius: 12px" name="start_date" type="date" id="start_date" value="{{ isset($leaverequest->start_date) ? $leaverequest->start_date : ''}}" >

@@ -186,7 +186,7 @@
                     </div>
                     <span>สังกัด...........โรงพยาบาลอ่างทอง.....................กลุ่มงาน............{{ $leaverequest->employ->agency->agency_name }}..........</span>
                     <div style="text-align: center;">ขอ {{ $leaverequest->leavetype->leave_type_name }}
-                        เนื่องจาก...................................</div>
+                        เนื่องจาก {{ $leaverequest->reason }}</div>
                     <span>ตั้งแต่{{ $leaverequest->start_date->thaidate('วันที่ j เดือน M พ.ศ y') }} ถึงวันที่
                         {{ $leaverequest->end_date->thaidate('j เดือน M พ.ศ y') }}
                         มีกำหนด {{ $leaverequest->total_leave }} วัน</span> <br>

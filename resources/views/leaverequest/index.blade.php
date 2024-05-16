@@ -52,6 +52,8 @@
                                     @php
                                       $leaverequest = $leaverequest->first()  
                                     @endphp
+
+                                    @if($leaverequest != null)
                                     {{-- @foreach ($leaverequest as $item) --}}
                                         <tr>
                                             {{-- <td>{{ $loop->iteration }}</td> --}}
@@ -90,6 +92,7 @@
                                             </td>
                                         </tr>
                                     {{-- @endforeach --}}
+                                    @endif
                                 </tbody>
                             </table>
                             {{-- <div class="pagination-wrapper"> {!! $leaverequest->appends(['search' => Request::get('search')])->render() !!} </div> --}}
