@@ -42,8 +42,12 @@ Route::middleware(['auth'])->group(function (){
     Route::get('history',[leaverequestController::class, 'index2']);
     Route::resource('agency',agencyController::class);
     Route::get('leaverequest/{id}/pdf', [leaverequestController::class, 'pdf']);
+    Route::get('counter',function(){
+        return view('counter');
+    });
 
 });
+
 
 require __DIR__.'/auth.php';
 

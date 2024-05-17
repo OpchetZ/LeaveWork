@@ -27,16 +27,14 @@ class leaverequestController extends Controller
     }
     public function index2(Request $request)
     {
-        $search = $request->get('employ');
+        
         $employs = employ::get();
         $agen = agency::get();
         $leaverequest = leaverequest::get();
-        $filiter = collect([]);
-        if ($search) {
-            $filiter = $leaverequest->employ->whereIn('name',$search);
-        }
+        
+        
     
-        return view('leaverequest.index2', compact('leaverequest','employs','agen','filiter'));
+        return view('leaverequest.index2', compact('leaverequest','employs','agen'));
     }
 
     /**
