@@ -12,14 +12,27 @@ class Historyindex2 extends Component
     public $employs;
     public $agen;
     public $leaverequest;
-    public function mount()
-    {
-        $this->employs = Employ::with('agency')->get();
-        $this->agen = Agency::get();
-        $this->leaverequest = LeaveRequest::get();
+    public $list = [];
+    public function mount(){
+        $this->employs = employ::all();
+        $this->agen = agency::all();
+        $this->leaverequest = LeaveRequest::all();
+
+        
     }
+    public function employ(){
+        $this->list = $this->employs->pluck('id');
+        
+    }
+    
     public function render()
     {
-        return view('livewire.historyindex2');
+        
+        
+        return view('livewire.historyindex2', [
+            'employs' => $this->employs,
+            'agen' => $this->agen,
+            'leaverequest' => $this->leaverequest,
+        ]);
     }
 }

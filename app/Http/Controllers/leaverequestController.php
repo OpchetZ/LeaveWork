@@ -34,7 +34,7 @@ class leaverequestController extends Controller
         
         
     
-        return view('leaverequest.index2', compact('leaverequest','employs','agen'));
+        return view('leaverequest.index2',compact('employs','agen','leaverequest'));
     }
 
     /**

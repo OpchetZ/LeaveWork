@@ -3,7 +3,6 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
-                    {{-- <div class="card-header">Leaverequest</div> --}}
                     <div class="card-body">
                         <div class="row">
                             <div class="col-lg-3">
@@ -12,6 +11,9 @@
                                     <i class="fa fa-arrow-left" aria-hidden="true"></i> หน้าแรก
                                 </a>
                             </div>
+                            @php
+                                   $filteredLeaveRequests = $leaverequest->whereIn('employ_id', $list);
+                               @endphp
                             <div class="col-lg-3">
                                 <form action="{{ url('/history') }}" method="GET">
                                     <select class="form-select" name="agen" id="agen" required>
@@ -23,11 +25,10 @@
                                     <script>
                                         document.querySelector("#agen").value = "{{ request('agen') ? request('agen') : '' }}";
                                     </script>
-                                    <button style="font-family: Frutiger" class="col-md-12 btn btn-primary" type="submit">Search</button>
                                 </form>  
                             </div>
                             <div class="col-lg-3">
-                                <select class="form-select" name="employ" id="employ" required>
+                                <select class="form-select" name="employ" id="employ" wire:model="list" required>
                                     <option value="">รายชื่อ</option>
                                     @foreach($employs as $item)
                                     <option value="{{ $item->id }}">{{ $item->name }}</option>
@@ -56,33 +57,25 @@
                                 </tr>
                             </thead>
                             <tbody>
+                               @if($list != null)
                                
-                                @foreach ($leaverequest as $leaverequest)
+                                @foreach ($filteredLeaveRequests as $leaveRequest)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $leaverequest->employ->name }}</td>
-                                        <td>{{ $leaverequest->leavetype->leave_type_name }}</td>
-                                        <td>{{ $leaverequest->start_date->thaidate('วันที่ j M พ.ศ. y') }}</td>
-                                        <td>{{ $leaverequest->end_date->thaidate('วันที่ j M พ.ศ. y') }}</td>
-                                        <td>{{ $leaverequest->total_leave }}</td>
+                                        <td>{{ $leaveRequest->employ->name }}</td>
+                                        <td>{{ $leaveRequest->leavetype->leave_type_name }}</td>
+                                        <td>{{ $leaveRequest->start_date->thaidate('วันที่ j M พ.ศ. y') }}</td>
+                                        <td>{{ $leaveRequest->end_date->thaidate('วันที่ j M พ.ศ. y') }}</td>
+                                        <td>{{ $leaveRequest->total_leave }}</td>
                                         
                                         <td>
-                                            <a href="{{ url('/leaverequest/' . $item->id) }}"
+                                            <a href="{{ url('/leaverequest/' . $leaveRequest->id) }}"
                                                 title="View leaverequest"><button class="btn btn-info btn-sm"><i
                                                         class="fa fa-eye" aria-hidden="true"></i> ดู</button></a>
-                                            {{-- <a href="{{ url('/leaverequest/' . $item->id . '/edit') }}"
-                                                    title="Edit leaverequest"><button class="btn btn-primary btn-sm"><i
-                                                            class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                                                        แก้ไข</button></a>
-                                                <a href="{{ url('/leaverequest/' . $item->id . '/pdf') }}"
-                                                    title="PDF">
-                                                    <button class="btn btn-success btn-sm">
-                                                        <i class="fa fa-file" aria-hidden="true"> พิมพ์ใบลา</i> 
-                                                    </button>
-                                                </a> --}}
+                                           
 
 
-                                            <form method="POST" action="{{ url('/leaverequest' . '/' . $item->id) }}"
+                                            <form method="POST" action="{{ url('/leaverequest' . '/' . $leaveRequest->id) }}"
                                                 accept-charset="UTF-8" style="display:inline">
                                                 {{ method_field('DELETE') }}
                                                 {{ csrf_field() }}
@@ -96,11 +89,12 @@
                                     </tr>
                                 @endforeach
                                
-                                    
-                                
+                                 @else   
+                                 
+                                @endif
                             </tbody>
                         </table>
-                        {{-- <div class="pagination-wrapper"> {!! $leaverequest->appends(['search' => Request::get('search')])->render() !!} </div> --}}
+                        
                     </div>
 
                 </div>
