@@ -9,16 +9,18 @@ use Livewire\Component;
 
 class Historyindex2 extends Component
 {
-    public $employs;
-    public $agen;
-    public $leaverequest;
+    public $employs,$agen,$leaverequest;
     public $list = [];
+    public $agenlist = [];
     public function mount(){
         $this->employs = employ::all();
         $this->agen = agency::all();
         $this->leaverequest = LeaveRequest::all();
 
         
+    }
+    public function agency(){
+        $this->agenlist = $this->agen->pluck('id');
     }
     public function employ(){
         $this->list = $this->employs->pluck('id');

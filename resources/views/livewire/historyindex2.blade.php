@@ -12,26 +12,31 @@
                                 </a>
                             </div>
                             @php
-                                   $filteredLeaveRequests = $leaverequest->whereIn('employ_id', $list);
-                               @endphp
+                                $filteredLeaveRequests = $leaverequest->whereIn('employ_id', $list);
+                                $filteredem = $employs->whereIn('agent_id', $agenlist);
+                                $totalvaca = $leaverequest->whereIn('employ_id',$list)->whereIn('leave_type_id','1')->sum('total_leave');
+                                $totalbus = $leaverequest->whereIn('employ_id',$list)->whereIn('leave_type_id','2')->sum('total_leave');
+                                $totalsick = $leaverequest->whereIn('employ_id',$list)->whereIn('leave_type_id','4')->sum('total_leave');
+                            @endphp
                             <div class="col-lg-3">
                                 <form action="{{ url('/history') }}" method="GET">
-                                    <select class="form-select" name="agen" id="agen" required>
+                                    <select class="form-select" name="agen" id="agen" wire:model="agenlist"
+                                        required>
                                         <option value="">หน่วยงาน</option>
-                                        @foreach($agen as $item)
-                                        <option value="{{ $item->id }}">{{ $item->agency_name }}</option>
+                                        @foreach ($agen as $item)
+                                            <option value="{{ $item->id }}">{{ $item->agency_name }}</option>
                                         @endforeach
                                     </select>
                                     <script>
                                         document.querySelector("#agen").value = "{{ request('agen') ? request('agen') : '' }}";
                                     </script>
-                                </form>  
+                                </form>
                             </div>
                             <div class="col-lg-3">
                                 <select class="form-select" name="employ" id="employ" wire:model="list" required>
                                     <option value="">รายชื่อ</option>
-                                    @foreach($employs as $item)
-                                    <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                    @foreach ($filteredem as $item)
+                                        <option value="{{ $item->id }}">{{ $item->name }}</option>
                                     @endforeach
                                 </select>
                                 <script>
@@ -47,7 +52,7 @@
                         <table class="table">
                             <thead>
                                 <tr>
-                                    <th>#</th>
+                                   
                                     <th>ชื่อพนักงาน</th>
                                     <th>ประเภทการลา</th>
                                     <th>วันเริ่ม</th>
@@ -57,49 +62,51 @@
                                 </tr>
                             </thead>
                             <tbody>
-                               @if($list != null)
-                               
-                                @foreach ($filteredLeaveRequests as $leaveRequest)
-                                    <tr>
-                                        <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $leaveRequest->employ->name }}</td>
-                                        <td>{{ $leaveRequest->leavetype->leave_type_name }}</td>
-                                        <td>{{ $leaveRequest->start_date->thaidate('วันที่ j M พ.ศ. y') }}</td>
-                                        <td>{{ $leaveRequest->end_date->thaidate('วันที่ j M พ.ศ. y') }}</td>
-                                        <td>{{ $leaveRequest->total_leave }}</td>
-                                        
-                                        <td>
-                                            <a href="{{ url('/leaverequest/' . $leaveRequest->id) }}"
-                                                title="View leaverequest"><button class="btn btn-info btn-sm"><i
-                                                        class="fa fa-eye" aria-hidden="true"></i> ดู</button></a>
-                                           
+                                @if ($list != null)
+                                
+                                    @foreach ($filteredLeaveRequests as $leaveRequest)
+                                        <tr>
+                                            
+                                            <td>{{ $leaveRequest->employ->name }}</td>
+                                            <td>{{ $leaveRequest->leavetype->leave_type_name }}</td>
+                                            <td>{{ $leaveRequest->start_date->thaidate('วันที่ j M พ.ศ. y') }}</td>
+                                            <td>{{ $leaveRequest->end_date->thaidate('วันที่ j M พ.ศ. y') }}</td>
+                                            <td>{{ $leaveRequest->total_leave }}</td>
+
+                                            <td>
+                                                <a href="{{ url('/leaverequest/' . $leaveRequest->id) }}"
+                                                    title="View leaverequest"><button class="btn btn-info btn-sm"><i
+                                                            class="fa fa-eye" aria-hidden="true"></i> ดู</button></a>
 
 
-                                            <form method="POST" action="{{ url('/leaverequest' . '/' . $leaveRequest->id) }}"
-                                                accept-charset="UTF-8" style="display:inline">
-                                                {{ method_field('DELETE') }}
-                                                {{ csrf_field() }}
-                                                <button type="submit" class="btn btn-danger btn-sm"
-                                                    title="Delete leaverequest"
-                                                    onclick="return confirm('Confirm delete?')"><i class="fa fa-trash-o"
-                                                        aria-hidden="true"></i>
-                                                    ลบ</button>
-                                            </form>
-                                        </td>
-                                    </tr>
-                                @endforeach
-                               
-                                 @else   
-                                 
+
+                                                <form method="POST"
+                                                    action="{{ url('/leaverequest' . '/' . $leaveRequest->id) }}"
+                                                    accept-charset="UTF-8" style="display:inline">
+                                                    {{ method_field('DELETE') }}
+                                                    {{ csrf_field() }}
+                                                    <button type="submit" class="btn btn-danger btn-sm"
+                                                        title="Delete leaverequest"
+                                                        onclick="return confirm('Confirm delete?')"><i
+                                                            class="fa fa-trash-o" aria-hidden="true"></i>
+                                                        ลบ</button>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                    <td><b>ลาพักผ่อน {{ $totalvaca }} </b></td>
+                                    <td><b>ลากิจ {{ $totalbus }}</b></td>
+                                    <td><b>ลาป่วย {{ $totalsick }}</b></td>
+                                @else
                                 @endif
                             </tbody>
                         </table>
-                        
+
                     </div>
 
                 </div>
             </div>
         </div>
     </div>
-    </div>
+</div>
 </div>

@@ -129,6 +129,7 @@ class leaverequestController extends Controller
     }
     public function pdf($id)
     {
+        ini_set('max_execution_time', '300');
         $leaverequest = leaverequest::findOrFail($id);
         // $startdate = Carbon::parse('2024-04-23')->thaidate('วันที่ j เดือน F พ.ศ. y');
         $employs = employ::get();
