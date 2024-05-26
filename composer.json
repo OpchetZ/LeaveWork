@@ -40,20 +40,7 @@
         }
     },
     "scripts": {
-        "build": ["composer install --prefer-dist --no-dev -o --no-interaction --no-scripts --verbose"],
-        "post-autoload-dump": [
-            "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
-            "@php artisan package:discover --ansi"
-        ],
-        "post-update-cmd": [
-            "@php artisan vendor:publish --tag=laravel-assets --ansi --force"
-        ],
-        "post-root-package-install": [
-            "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
-        ],
-        "post-create-project-cmd": [
-            "@php artisan key:generate --ansi"
-        ]
+        "build": "composer install --prefer-dist --no-dev -o --no-interaction --verbose"
     },
     "extra": {
         "laravel": {
@@ -61,6 +48,9 @@
         }
     },
     "config": {
+        "platform": {
+            "php": "7.4.0"  
+        },
         "optimize-autoloader": true,
         "preferred-install": "dist",
         "sort-packages": true
