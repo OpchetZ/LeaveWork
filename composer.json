@@ -40,6 +40,7 @@
         }
     },
     "scripts": {
+        "build": ["composer install --prefer-dist --no-dev -o --no-interaction --no-scripts --verbose"],
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
             "@php artisan package:discover --ansi"
@@ -64,6 +65,15 @@
         "preferred-install": "dist",
         "sort-packages": true
     },
+    
+        
+    
+    
     "minimum-stability": "dev",
     "prefer-stable": true
+    
+    
+        
+    
+    
 }
