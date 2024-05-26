@@ -14,6 +14,7 @@
         "laravel/framework": "^8.75",
         "laravel/sanctum": "^2.11",
         "laravel/tinker": "^2.5",
+        "laravelcollective/html": "^6.4",
         "livewire/livewire": "^2.12",
         "nesbot/carbon": "^2.72",
         "phattarachai/thaidate": "^12.1"
