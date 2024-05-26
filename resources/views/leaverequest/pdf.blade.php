@@ -53,9 +53,8 @@
                     }
                 @endphp
                 <div class="container">
-                    <div class="">
-                        <span id="nam">ข้าพเจ้า {{ $leaverequest->employ->name }} </span><span id="posi"> ตำแหน่ง
-                            {{ $leaverequest->employ->position->Job_position }}</span>
+                    <div class="text-right">
+                        <span id="">ข้าพเจ้า {{ $leaverequest->employ->name }} </span><span id="tab2"> ตำแหน่ง{{ $leaverequest->employ->position->Job_position }}</span>
                     </div>
                     <span>สังกัด...........โรงพยาบาลอ่างทอง...........................กลุ่มงาน.............{{ $leaverequest->employ->agency->agency_name }}.........</span>
                     <span>มีวันลาพักผ่อนสะสม {{ $accday }} วันทำการมีสิทธิลาพักผ่อนประจำปีนี้อีก
@@ -67,11 +66,11 @@
                         ในระหว่างการลาติดต่อข้าพเจ้าได้ที่.......................................................................................</span>
                     <span>..........................................................หมายเลขโทรศัพท์.............{{ $leaverequest->employ->phone }}......................</span>
                 </div>
-                <br>
+                
                 <div class="row">
                     <div class="col-xs-6"></div>
                     <div class="col-xs-6">
-                        <span> ขอแสดงความนับถือ</span><br>
+                        <span> ขอแสดงความนับถือ</span><br><br>
                         <span>ลงชื่อ.................................</span><br>
                         <span>({{ $leaverequest->employ->name }})</span>
                     </div>
@@ -86,7 +85,7 @@
                             <div class="col-xs-4 b">ลาครั้งนี้<br>(วันทำการ)</div>
                             <div class="col-xs-4 b">รวมเป็น<br>(วันทำการ)</div>
                             <div class="col-xs-6 text-center"><span>
-                                    (นายยุทนา เกษมสุข)<br>เจ้าพนักงานธุรการปฎิบัติงาน</span></div>
+                                    (นายยุทธนา เกษมสุข)<br>เจ้าพนักงานธุรการปฎิบัติงาน</span></div>
                         </div>
                         <div class="row text-center">
                             <div class="col-xs-4 b"> {{ $leavevaca }} <br></div>
@@ -180,29 +179,26 @@
                         ->first();
                 @endphp
                 <div class="container">
-                    <div class="">
-                        <span id="nam">ข้าพเจ้า {{ $leaverequest->employ->name }} </span><span id="posi"> ตำแหน่ง
+                    <div class="text-right">
+                        <span id="">ข้าพเจ้า {{ $leaverequest->employ->name }} </span><span id="tab2"> ตำแหน่ง
                             {{ $leaverequest->employ->position->Job_position }}</span>
                     </div>
                     <span>สังกัด...........โรงพยาบาลอ่างทอง.....................กลุ่มงาน............{{ $leaverequest->employ->agency->agency_name }}..........</span>
-                    <div style="text-align: center;">ขอ {{ $leaverequest->leavetype->leave_type_name }}
-                        เนื่องจาก {{ $leaverequest->reason }}</div>
-                    <span>ตั้งแต่{{ $leaverequest->start_date->thaidate('วันที่ j เดือน M พ.ศ y') }} ถึงวันที่
-                        {{ $leaverequest->end_date->thaidate('j เดือน M พ.ศ y') }}
-                        มีกำหนด {{ $leaverequest->total_leave }} วัน</span> <br>
+                    <div style="text-align: left;"><span class="tab2">ขอ {{ $leaverequest->leavetype->leave_type_name }}</span><span>เนื่องจาก {{ $leaverequest->reason }}</span></div>
+                    <span id="tab">ตั้งแต่{{ $leaverequest->start_date->thaidate('วันที่ j M y') }}</span>ถึงวันที่
+                        <span id="tab">{{ $leaverequest->end_date->thaidate('j M y') }}</span>
+                        <span>มีกำหนด {{ $leaverequest->total_leave }} วัน</span> <br>
                     <span>ข้าพเจ้าได้ {{ $leaverequest->leavetype->leave_type_name }}
-                        ครั้งสุดท้ายตั้งแต่{{ $lastdate ? $lastdate->start_date->thaidate('วันที่ j เดือน M พ.ศ y') : '......................' }}ถึงวันที่
-                        {{ $lastdate ? $lastdate->end_date->thaidate('j เดือน M พ.ศ y') : '.....................' }}</span><br>
-                    <span>รวม{{ $lastdate->total_leave ?? '...' }}วัน
+                        ครั้งสุดท้ายตั้งแต่ {{ $lastdate ? $lastdate->start_date->thaidate('วันที่ j M y') : '......................' }} ถึงวันที่{{ $lastdate ? $lastdate->end_date->thaidate(' j M y ') : '.....................' }}</span><span>รวม {{ $lastdate->total_leave ?? '...' }} วัน
                         ในระหว่างการลาติดต่อข้าพเจ้าได้ที่...............................................................................</span>
                     <br>
-                    <span>..........................................................หมายเลขโทรศัพท์.............{{ $leaverequest->employ->phone }}............................</span>
+                    <span>..........................................................หมายเลขโทรศัพท์.............{{ $leaverequest->employ->phone }}..............</span>
                 </div>
-                <br>
+                
                 <div class="row">
                     <div class="col-xs-6"></div>
                     <div class="col-xs-6">
-                        <span> ขอแสดงความนับถือ</span><br>
+                        <span> ขอแสดงความนับถือ</span><br><br>
                         <span>ลงชื่อ.................................</span><br>
                         <span>({{ $leaverequest->employ->name }})</span>
                     </div>
@@ -224,7 +220,7 @@
                             <div class="col-xs-4 b">{{ $sickleave ?? null }}<br></div>
                             <div class="col-xs-4 b">{{ $sickallleave ?? null }}<br></div>
                             <div class="col-xs-6 text-center"><span>
-                                    (นายยุทนา เกษมสุข)</span></div>
+                                    (นายยุทธนา เกษมสุข)</span></div>
                         </div>
                         <div class="row text-center">
                             <div class="col-xs-4 b">กิจส่วนตัว</div>
